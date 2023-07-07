@@ -18,10 +18,11 @@
       "@/*": ["./*"],
       "@components/*": ["./components/*"],
       "@/graphql/*": ["./graphql/*"],
-      "@/utils/*": ["./utils/*"]
+      "@/utils/*": ["./utils/*"],
+      "@/libs/*": ["./libs/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/**/*.ts"],
   "exclude": ["node_modules", "**/*.spec.ts"],
   "files": ["graphql.d.ts"]
 }
