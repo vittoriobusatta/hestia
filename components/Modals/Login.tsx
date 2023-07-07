@@ -1,48 +1,75 @@
 "use client";
 
-import React from "react";
+import React, { useCallback, useState } from "react";
 import Modal from "./Modal";
 import useLoginModal from "@/hooks/useLoginModal";
+import Input from "../inputs/Input";
+import useRegisterModal from "@/hooks/useRegisterModal";
+import { useRouter } from "next/router";
+import { FieldValues, useForm } from "react-hook-form";
 
 function Login() {
+  const router = useRouter();
   const loginModal = useLoginModal();
+  const registerModal = useRegisterModal();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FieldValues>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const onToggle = useCallback(() => {
+    loginModal.onClose();
+    registerModal.onOpen();
+  }, [loginModal, registerModal]);
+
+  const BodyContent = (
+    <div>
+      <h1>Welcome back, Login to your account!</h1>
+      <Input
+        id="email"
+        label="Email"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
+      <Input
+        id="password"
+        label="Password"
+        type="password"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
+    </div>
+  );
+
+  const FooterContent = (
+    <div>
+      <p>
+        First time using Airbnb?
+        <span onClick={onToggle}>Create an account</span>
+      </p>
+    </div>
+  );
 
   return (
-    <Modal isOpen={loginModal.isOpen} onClose={loginModal.onClose}>
-      <div className="modal__header">
-        <h2 className="modal__title">Login</h2>
-        <button className="modal__close" onClick={loginModal.onClose}>
-          X
-        </button>
-      </div>
-      <div className="modal__body">
-        <form className="form">
-          <div className="form__group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Email"
-              className="form__input"
-            />
-          </div>
-          <div className="form__group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Password"
-              className="form__input"
-            />
-          </div>
-          <div className="form__group">
-            <button className="form__button">Login</button>
-          </div>
-        </form>
-      </div>
-    </Modal>
+    <Modal
+      isOpen={loginModal.isOpen}
+      onClose={loginModal.onClose}
+      title="Login"
+      body={BodyContent}
+      footer={FooterContent}
+    ></Modal>
   );
 }
 
