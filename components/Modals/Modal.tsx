@@ -1,14 +1,30 @@
 "use client";
 
-import React, { ReactNode, useCallback, useEffect, useState } from "react";
+import React, {
+  ReactElement,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 
 interface ModalProps {
   isOpen?: boolean;
   onClose: () => void;
-  children: ReactNode;
+  title?: string;
+  body?: ReactElement;
+  footer?: ReactElement;
+  onSubmit?: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  title,
+  body,
+  footer,
+  onSubmit,
+}) => {
   const [showModal, setShowModal] = useState(isOpen);
 
   useEffect(() => {
@@ -25,7 +41,19 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
       {showModal && (
         <div className="modal">
           <div className="modal__overlay" onClick={handleClose} />
-          <div className="modal__content">{children}</div>
+          <div className="modal__content">
+            <div className="modal__header">
+              <h2 className="modal__title">{title}</h2>
+              <button className="modal__close" onClick={handleClose}>
+                X
+              </button>
+            </div>
+            <div className="modal__body">{body}</div>
+            <button className="modal__submit" onClick={onSubmit}>
+              Submit
+            </button>
+            <div className="modal__footer">{footer}</div>
+          </div>
         </div>
       )}
     </>

@@ -1,51 +1,103 @@
 "use client";
 
-import React from "react";
+import React, { useCallback, useState } from "react";
 import Modal from "./Modal";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import axios from "axios";
+import useLoginModal from "@/hooks/useLoginModal";
 import useRegisterModal from "@/hooks/useRegisterModal";
+import Input from "../inputs/Input";
 
 function Register() {
   const registerModal = useRegisterModal();
-  
+  const loginModal = useLoginModal();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FieldValues>({
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    setIsLoading(true);
+    axios
+      .post("/api/register", data)
+      .then((res) => {
+        console.log(res);
+        registerModal.onClose();
+        loginModal.onOpen();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const onToggle = useCallback(() => {
+    registerModal.onClose();
+    loginModal.onOpen();
+  }, [registerModal, loginModal]);
+
+
+  const bodyContent = (
+    <form className="form">
+      <h1>Welcome to Hestia, Create an account!</h1>
+      <Input
+        id="name"
+        label="Name"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
+      <Input
+        id="email"
+        label="Email"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+      />
+      <Input
+        id="password"
+        label="Password"
+        type="password"
+        disabled={isLoading}
+        register={register}
+        errors={errors}
+        required
+        strenghtLabel={true}
+      />
+    </form>
+  );
+
+  const FooterConent = (
+    <div className="form__group">
+      <p>
+        Already have an account?
+        <span onClick={onToggle}> Log in</span>
+      </p>
+    </div>
+  );
+
   return (
     <Modal
       isOpen={registerModal.isOpen}
       onClose={registerModal.onClose}
-    >
-      <div className="modal__header">
-        <h2 className="modal__title">Register</h2>
-        <button className="modal__close" onClick={registerModal.onClose}>
-          X
-        </button>
-      </div>
-      <div className="modal__body">
-        <form className="form">
-          <div className="form__group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Email"
-              className="form__input"
-            />
-          </div>
-          <div className="form__group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Password"
-              className="form__input"
-            />
-          </div>
-          <div className="form__group">
-            <button className="form__button">Register</button>
-          </div>
-        </form>
-      </div>
-    </Modal>
+      title="Register"
+      body={bodyContent}
+      footer={FooterConent}
+      onSubmit={handleSubmit(onSubmit)}
+    ></Modal>
   );
 }
 
