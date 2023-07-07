@@ -1,0 +1,22 @@
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 99;
+  padding: 12px $gap;
+  @media screen and (min-width: 576px) {
+    padding: 16px $gap;
+  }
+  @media screen and (min-width: 992px) {
+    padding: 20px $gap;
+  }
+  & a,
+  button {
+    color: $tertiaryColor;
+    font-size: 18px;
+    cursor: pointer;
+  }
+}

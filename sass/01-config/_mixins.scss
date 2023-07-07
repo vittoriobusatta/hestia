@@ -1,0 +1,10 @@
+@mixin full_hw {
+  height: 100%;
+  width: 100%;
+}
+
+@mixin fja_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

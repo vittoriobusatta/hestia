@@ -1,0 +1,16 @@
+.menu {
+  position: fixed;
+  inset: 0;
+  height: calc(100% + env(safe-area-inset-top));
+  min-height: -webkit-fill-available;
+  width: 100%;
+  z-index: 77;
+  background-color: $primaryColor;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  &--open {
+    opacity: 1;
+    visibility: visible;
+  }
+}

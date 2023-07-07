@@ -1,0 +1,24 @@
+.loader {
+  height: calc(100% + env(safe-area-inset-top));
+  min-height: -webkit-fill-available;
+  width: 100%;
+  position: fixed;
+  @include fja_center;
+  inset: 0;
+  z-index: 110;
+  background-color: $secondaryColor;
+  &--out {
+    animation: loaderOut 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+}
+
+@keyframes loaderOut {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

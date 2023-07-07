@@ -1,0 +1,62 @@
+::-moz-selection {
+  background-color: rgb(0, 191, 255);
+  text-shadow: none;
+}
+::selection {
+  background-color: rgb(0, 191, 255);
+  text-shadow: none;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #faf7ee;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e1d2c1;
+  border-radius: 15px;
+}
+
+@supports (padding: env(safe-area-inset-top)) {
+  body {
+    font-size: 1.6rem;
+  }
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  @media screen and (max-width: 1400px) {
+    font-size: 58%;
+  }
+  @media screen and (max-width: 1224px) {
+    font-size: 52%;
+  }
+  @media screen and (max-width: 992px) {
+    font-size: 46%;
+  }
+  @media screen and (max-width: 768px) {
+    font-size: 40%;
+  }
+  @media screen and (max-width: 576px) {
+    font-size: 34%;
+  }
+  @media screen and (max-width: 321px) {
+    font-size: 28%;
+  }
+}
+
+main {
+  margin-top: 42px;
+  min-height: calc(100vh - 42px);
+  @media screen and (min-width: 576px) {
+    margin-top: 50px;
+    min-height: calc(100vh - 50px);
+  }
+  @media screen and (min-width: 992px) {
+    margin-top: 58px;
+    min-height: calc(100vh - 58px);
+  }
+}
