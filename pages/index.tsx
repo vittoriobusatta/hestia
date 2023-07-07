@@ -3,7 +3,6 @@ import Head from "next/head";
 import { gql } from "@/utils/helpers";
 import query from "@/graphql/queries/query.graphql";
 import { useEffect, useState } from "react";
-import { log } from "console";
 
 export default function Home() {
   const [data, setData] = useState(null);
@@ -25,8 +24,6 @@ export default function Home() {
 
     fetchData();
   }, []);
-
-  console.log(data);
 
   return (
     <>
