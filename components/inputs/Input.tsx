@@ -1,5 +1,6 @@
 import React, {
   ChangeEventHandler,
+  ReactNode,
   useCallback,
   useEffect,
   useMemo,
@@ -30,94 +31,25 @@ const Input: React.FC<InputProps> = ({
   strenghtLabel,
   placeholder,
 }) => {
-  const [passwordStrengthClass, setPasswordStrengthClass] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [pattern, setPattern] = useState<RegExp>(/./);
 
-  const strenght = useMemo(
-    () => [
-      {
-        id: 0,
-        name: "very-weak",
-        message: "Très faible",
-        color: "red",
-      },
-      {
-        id: 1,
-        name: "weak",
-        message:
-          "Votre mot de passe doit contenir au moins 2 des 4 éléments suivants : majuscule, minuscule, chiffre, symbole.",
-        color: "red",
-      },
-      {
-        id: 2,
-        name: "medium",
-        message:
-          "Pour obtenir un mot de passe plus solide, ajoutez quelques caractères, chiffres ou symboles.",
-        color: "orange",
-      },
-      {
-        id: 3,
-        name: "strong",
-        message: "C'est du solide !",
-        color: "green",
-      },
-      {
-        id: 4,
-        name: "very-strong",
-        message: "C'est du béton armé !",
-        color: "green",
-      },
-    ],
-    []
-  );
-
-  const handlePasswordChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const getPasswordStrength = (password: string): [string, string] => {
-        const hasNumber = /\d/;
-        const hasUpperCase = /[A-Z]/.test(password);
-        const hasLowerCase = /[a-z]/.test(password);
-        const hasSpecial = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
-
-        const hasLetter = hasUpperCase && hasLowerCase;
-        const hasAll =
-          hasNumber && hasLetter && hasSpecial && password.length >= 12;
-
-        if (hasAll) {
-          return [strenght[4].message, strenght[4].color];
-        } else if (
-          hasUpperCase &&
-          hasLowerCase &&
-          hasNumber &&
-          password.length >= 8
-        ) {
-          return [strenght[3].message, strenght[3].color];
-        } else if (hasUpperCase && hasLowerCase && password.length >= 8) {
-          return [strenght[3].message, strenght[3].color];
+  useEffect(() => {
+    switch (type) {
+      case "email":
+        if (strenghtLabel) {
+          setPattern(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$/);
+          break;
         }
-        if (hasUpperCase && password.length >= 8) {
-          return [strenght[2].message, strenght[2].color];
+      case "password":
+        if (strenghtLabel) {
+          setPattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^ws]).{8,}$/);
+          break;
         }
-        if (
-          password.length >= 8 &&
-          (hasUpperCase || hasLowerCase || hasNumber || hasSpecial)
-        ) {
-          return [strenght[1].message, strenght[1].color];
-        }
-        return [strenght[0].message, strenght[0].color];
-      };
-
-      if (!event || event.target.value === "") {
-        setPasswordError("");
-      } else {
-        const password = event.target.value;
-        const [message, color] = getPasswordStrength(password);
-        setPasswordStrengthClass(color);
-        setPasswordError(message);
-      }
-    },
-    [strenght]
-  );
+      default:
+        setPattern(/./);
+        break;
+    }
+  }, [type, strenghtLabel]);
 
   return (
     <>
@@ -127,23 +59,22 @@ const Input: React.FC<InputProps> = ({
           disabled={disabled}
           {...register(id, {
             required,
+            pattern: {
+              value: pattern,
+              message: `Inserer un ${
+                type === "email" ? "email" : "mot de passe"
+              }.`,
+            },
           })}
           placeholder={placeholder}
           type={type}
-          onChange={(e) => {
-            if (label === "Password" && strenghtLabel) {
-              handlePasswordChange(e);
-            } else {
-              return;
-            }
-          }}
         />
         <label>{label}</label>
       </div>
-      {passwordError && (
-        <span className={`password-strength ${passwordStrengthClass}`}>
-          {passwordError}
-        </span>
+      {errors[id] && (
+        <p className="form__error">
+          {(errors[id]?.message as ReactNode) || "Champ invalide"}
+        </p>
       )}
     </>
   );
