@@ -9,6 +9,9 @@ const nextConfig = {
     return config;
   },
   reactStrictMode: true,
+  experimental: {
+    serverComponentsExternalPackages: ["@prisma/client", "bcrypt"],
+  },
 };
 
 module.exports = nextConfig;
