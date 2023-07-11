@@ -2,9 +2,9 @@
 
 import React, { useCallback, useState } from "react";
 import Modal from "./Modal";
-import useLoginModal from "@/hooks/useLoginModal";
+import useLoginModal from "../../hooks/useLoginModal";
+import useRegisterModal from "../../hooks/useRegisterModal";
 import Input from "../inputs/Input";
-import useRegisterModal from "@/hooks/useRegisterModal";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
@@ -37,7 +37,7 @@ function Login() {
 
       if (callback?.ok) {
         console.log("Logged in!");
-        // router.refresh();
+        router.refresh();
         loginModal.onClose();
       }
 
