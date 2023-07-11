@@ -5,8 +5,9 @@ import Modal from "./Modal";
 import useLoginModal from "@/hooks/useLoginModal";
 import Input from "../inputs/Input";
 import useRegisterModal from "@/hooks/useRegisterModal";
-import { useRouter } from "next/router";
-import { FieldValues, useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
 function Login() {
   const router = useRouter();
@@ -24,6 +25,27 @@ function Login() {
       password: "",
     },
   });
+
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    setIsLoading(true);
+
+    signIn("credentials", {
+      ...data,
+      redirect: false,
+    }).then((callback) => {
+      setIsLoading(false);
+
+      if (callback?.ok) {
+        console.log("Logged in!");
+        // router.refresh();
+        loginModal.onClose();
+      }
+
+      if (callback?.error) {
+        console.log("Error logging in!");
+      }
+    });
+  };
 
   const onToggle = useCallback(() => {
     loginModal.onClose();
@@ -69,6 +91,7 @@ function Login() {
       title="Login"
       body={BodyContent}
       footer={FooterContent}
+      onSubmit={handleSubmit(onSubmit)}
     ></Modal>
   );
 }

@@ -1,32 +1,38 @@
-import bcrypt from "bcrypt";
 import NextAuth, { AuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { compare } from "bcrypt";
+import { PrismaClient } from "@prisma/client";
 
-import prisma from "@/libs/prisma";
+const prisma = new PrismaClient();
 
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     GithubProvider({
-      clientId: process.env.GITHUB_ID as string,
-      clientSecret: process.env.GITHUB_SECRET as string,
+      clientId: process.env.NEXT_PUBLIC_GITHUB_ID as string,
+      clientSecret: process.env.NEXT_PUBLIC_GITHUB_SECRET as string,
     }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      clientId: process.env.NEXT_PUBLIC_GOOGLE_ID as string,
+      clientSecret: process.env.NEXT_PUBLIC_GOOGLE_SECRET as string,
     }),
     CredentialsProvider({
       name: "credentials",
       credentials: {
-        email: { label: "email", type: "text" },
+        email: {
+          label: "email",
+          type: "text",
+          placeholder: "hello@example.com",
+        },
         password: { label: "password", type: "password" },
       },
       async authorize(credentials) {
+
         if (!credentials?.email || !credentials?.password) {
-          throw new Error("Invalid credentials");
+          return null;
         }
 
         const user = await prisma.user.findUnique({
@@ -36,30 +42,35 @@ export const authOptions: AuthOptions = {
         });
 
         if (!user || !user?.hashedPassword) {
-          throw new Error("Invalid credentials");
+          return null;
         }
 
-        const isCorrectPassword = await bcrypt.compare(
+        const isCorrectPassword = await compare(
           credentials.password,
           user.hashedPassword
         );
 
         if (!isCorrectPassword) {
-          throw new Error("Invalid credentials");
+          return null;
         }
 
-        return user;
+        return {
+          id: user.id + "",
+          name: user.name,
+          email: user.email,
+        };
       },
     }),
   ],
-  pages: {
-    signIn: "/",
-  },
-  debug: process.env.NODE_ENV === "development",
+  secret: process.env.SECRET,
   session: {
     strategy: "jwt",
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: "/",
+  },
 };
 
-export default NextAuth(authOptions);
+const authHandler = (req: any, res: any) => NextAuth(req, res, authOptions);
+
+export default authHandler;
