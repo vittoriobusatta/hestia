@@ -49,14 +49,14 @@ html {
 }
 
 main {
-  margin-top: 42px;
-  min-height: calc(100vh - 42px);
+  margin-top: 66px;
+  min-height: calc(100vh - 66px);
   @media screen and (min-width: 576px) {
-    margin-top: 50px;
-    min-height: calc(100vh - 50px);
+    margin-top: 74px;
+    min-height: calc(100vh - 74px);
   }
   @media screen and (min-width: 992px) {
-    margin-top: 58px;
-    min-height: calc(100vh - 58px);
+    margin-top: 82px;
+    min-height: calc(100vh - 82px);
   }
 }

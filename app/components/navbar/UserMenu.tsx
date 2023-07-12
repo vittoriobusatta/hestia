@@ -7,6 +7,7 @@ import { SafeUser } from "../../types/index";
 import useLoginModal from "../../hooks/useLoginModal";
 import useRegisterModal from "../../hooks/useRegisterModal";
 import MenuItem from "./Menu/MenuItem";
+import Avatar from "../Avatar";
 
 interface UserMenuProps {
   currentUser?: SafeUser | null;
@@ -25,15 +26,30 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   }, []);
 
   return (
-    <div className="relative">
-      <div className="flex flex-row items-center gap-3">
-        <div onClick={toggleOpen}>
-          <div>MENU</div>
-        </div>
+    <div className="user">
+      <div className="user-menu">
+        <button className="user-menu-container" onClick={toggleOpen}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 32 32"
+            aria-hidden="true"
+            role="presentation"
+            focusable="false"
+            className="burger-icon"
+          >
+            <g fill="none">
+              <path d="M2 16h28M2 24h28M2 8h28"></path>
+            </g>
+          </svg>
+          <div className="button-menu">
+            <Avatar src={currentUser?.image} />
+          </div>
+        </button>
       </div>
+
       {isOpen && (
-        <div>
-          <div>
+        <div className="user-connect">
+          <div className="user-connect-list">
             {currentUser ? (
               <>
                 <MenuItem
