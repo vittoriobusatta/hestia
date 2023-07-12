@@ -13,6 +13,12 @@ const nextConfig = {
     appDir: true,
     serverComponentsExternalPackages: ["@prisma/client", "bcrypt"],
   },
+  images: {
+    domains: [
+      "avatars.githubusercontent.com",
+      "lh3.googleusercontent.com",
+    ],
+  },
 };
 
 module.exports = nextConfig;

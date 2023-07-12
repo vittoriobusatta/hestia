@@ -8,6 +8,7 @@ import Input from "../inputs/Input";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import Button from "../inputs/Button";
 
 function Login() {
   const router = useRouter();
@@ -77,6 +78,8 @@ function Login() {
 
   const FooterContent = (
     <div>
+      <Button label="Login with Google" onClick={() => signIn("google", { callbackUrl: "/" })} /> 
+      <Button label="Login with Github" onClick={() => signIn("github", { callbackUrl: "/" })} />
       <p>
         First time using Airbnb?
         <span onClick={onToggle}>Create an account</span>
