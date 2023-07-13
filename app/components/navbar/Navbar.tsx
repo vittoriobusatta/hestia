@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { SafeUser } from "../../types/index";
-import UserMenu from "./UserMenu";
+import UserMenu from "./Menu/UserMenu";
 
 interface NavbarProps {
   currentUser?: SafeUser | null;

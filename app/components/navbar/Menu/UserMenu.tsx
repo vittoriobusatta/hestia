@@ -3,11 +3,11 @@
 import React, { useCallback, useState } from "react";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { SafeUser } from "../../types/index";
-import useLoginModal from "../../hooks/useLoginModal";
-import useRegisterModal from "../../hooks/useRegisterModal";
-import MenuItem from "./Menu/MenuItem";
-import Avatar from "../Avatar";
+import { SafeUser } from "../../../types/index";
+import useLoginModal from "../../../hooks/useLoginModal";
+import useRegisterModal from "../../../hooks/useRegisterModal";
+import MenuItem from "./MenuItem";
+import Avatar from "../../Avatar";
 
 interface UserMenuProps {
   currentUser?: SafeUser | null;
@@ -24,6 +24,9 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
   }, []);
+
+  console.log(currentUser);
+  
 
   return (
     <div className="user">

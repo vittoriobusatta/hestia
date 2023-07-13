@@ -8,7 +8,11 @@ interface MenuItemProps {
 }
 
 const MenuItem: React.FC<MenuItemProps> = ({ onClick, label }) => {
-  return <div onClick={onClick}>{label}</div>;
+  return (
+    <li onClick={onClick}>
+      <a>{label}</a>
+    </li>
+  );
 };
 
 export default MenuItem;
