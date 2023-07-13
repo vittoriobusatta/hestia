@@ -8,6 +8,9 @@ import Input from "../inputs/Input";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import Button from "../inputs/Button";
+import { FcGoogle } from "react-icons/fc";
+import { AiFillGithub } from "react-icons/ai";
 
 function Login() {
   const router = useRouter();
@@ -35,7 +38,7 @@ function Login() {
     }).then((callback) => {
       setIsLoading(false);
 
-      if (callback?.ok) {
+      if (callback?.ok && !callback?.error) {
         console.log("Logged in!");
         router.refresh();
         loginModal.onClose();
@@ -77,6 +80,18 @@ function Login() {
 
   const FooterContent = (
     <div>
+      <Button
+        outline 
+        label="Continue with Google"
+        icon={FcGoogle}
+        onClick={() => signIn('google')}
+      />
+      <Button 
+        outline 
+        label="Continue with Github"
+        icon={AiFillGithub}
+        onClick={() => signIn('github')}
+      />
       <p>
         First time using Airbnb?
         <span onClick={onToggle}>Create an account</span>

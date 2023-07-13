@@ -7,6 +7,10 @@ import axios from "axios";
 import useLoginModal from "../../hooks/useLoginModal";
 import useRegisterModal from "../../hooks/useRegisterModal";
 import Input from "../inputs/Input";
+import Button from "../inputs/Button";
+import { FcGoogle } from "react-icons/fc";
+import { AiFillGithub } from "react-icons/ai";
+import { signIn } from "next-auth/react";
 
 function Register() {
   const registerModal = useRegisterModal();
@@ -46,7 +50,6 @@ function Register() {
     loginModal.onOpen();
   }, [registerModal, loginModal]);
 
-
   const bodyContent = (
     <form className="form">
       <h1>Welcome to Hestia, Create an account!</h1>
@@ -81,6 +84,18 @@ function Register() {
 
   const FooterConent = (
     <div className="form__group">
+      <Button
+        outline
+        label="Continue with Google"
+        icon={FcGoogle}
+        onClick={() => signIn("google")}
+      />
+      <Button
+        outline
+        label="Continue with Github"
+        icon={AiFillGithub}
+        onClick={() => signIn("github")}
+      />
       <p>
         Already have an account?
         <span onClick={onToggle}> Log in</span>

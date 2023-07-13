@@ -2,11 +2,23 @@ import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { compare } from "bcrypt";
-import prisma from "../../../app/libs/prisma";
+import prisma from "../../../libs/prisma";
+import GoogleProvider from "next-auth/providers/google";
+import GithubProvider from "next-auth/providers/github";
 
 export const authOptions: AuthOptions = {
-  adapter: PrismaAdapter(prisma),
+  session: {
+    strategy: "jwt",
+  },
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID as string,
+      clientSecret: process.env.GOOGLE_SECRET as string,
+    }),
+    GithubProvider({
+      clientId: process.env.GITHUB_ID as string,
+      clientSecret: process.env.GITHUB_SECRET as string,
+    }),
     CredentialsProvider({
       name: "credentials",
       credentials: {
@@ -19,7 +31,7 @@ export const authOptions: AuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          return null;
+          throw new Error("Please enter an email and password");
         }
 
         const user = await prisma.user.findUnique({
@@ -29,34 +41,30 @@ export const authOptions: AuthOptions = {
         });
 
         if (!user || !user?.hashedPassword) {
-          return null;
+          throw new Error("No user found");
         }
 
-        const isCorrectPassword = await compare(
+        const passwordMatch = await compare(
           credentials.password,
           user.hashedPassword
         );
 
-        if (!isCorrectPassword) {
-          return null;
+        if (!passwordMatch) {
+          throw new Error("Incorrect password");
         }
 
-        return {
-          id: user.id + "",
-          name: user.name,
-          email: user.email,
-        };
+        return user;
       },
     }),
   ],
-  debug: true,
   pages: {
     signIn: "/",
   },
-  session: {
-    strategy: "jwt",
-  },
-  secret: process.env.NEXTAUTH_SECRET,
 };
 
-export default NextAuth(authOptions);
+const handler = NextAuth({
+  adapter: PrismaAdapter(prisma),
+  ...authOptions,
+  secret: process.env.NEXTAUTH_SECRET,
+});
+export { handler as GET, handler as POST };
