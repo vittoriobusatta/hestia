@@ -25,7 +25,6 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     setIsOpen((value) => !value);
   }, []);
 
-  console.log(currentUser);
   
 
   return (
