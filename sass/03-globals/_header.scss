@@ -19,6 +19,11 @@
     font-size: 18px;
     cursor: pointer;
   }
+  &__logo {
+    & svg path {
+      fill: #FF385C;
+    }
+  }
 }
 
 .account-icon {
