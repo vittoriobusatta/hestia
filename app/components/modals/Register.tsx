@@ -29,8 +29,7 @@ function Register() {
     setIsLoading(true);
     axios
       .post("/api/register", data)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         registerModal.onClose();
         loginModal.onOpen();
       })

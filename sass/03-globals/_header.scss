@@ -80,7 +80,7 @@
 
 .user-connect-list {
   @include full_hw;
-  & div {
+  & li {
     width: max-content;
     margin: 0 auto;
     padding: 0;
