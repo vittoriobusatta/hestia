@@ -143,9 +143,6 @@ const Modal: React.FC<ModalProps> = ({
                 </span>
               </button>
             </div>
-            <div className="modal__separator">
-              <div className="modal__separator__text">or</div>
-            </div>
             <div className="modal__footer">{footer}</div>
           </div>
         </div>

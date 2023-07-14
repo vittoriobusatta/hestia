@@ -52,7 +52,9 @@ function Register() {
 
   const bodyContent = (
     <>
-      <h1 className="modal__body__title">Welcome to Hestia, Create an account!</h1>
+      <h1 className="modal__body__title">
+        Welcome to Hestia, Create an account!
+      </h1>
       <form className="form">
         <Input
           id="name"
@@ -86,6 +88,9 @@ function Register() {
 
   const FooterConent = (
     <>
+      <div className="modal__separator">
+        <div className="modal__separator__text">or</div>
+      </div>
       <div className="modal__footer__buttons">
         <Button
           outline

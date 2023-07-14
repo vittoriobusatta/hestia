@@ -52,6 +52,10 @@
 }
 .user {
   position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 2.5vw;
 }
 .user-menu-container {
   display: inline-flex;

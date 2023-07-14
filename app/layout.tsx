@@ -6,6 +6,7 @@ import Navbar from "./components/navbar/Navbar";
 import getCurrentUser from "./actions/getCurrentUser";
 import "../sass/styles.scss";
 import { Providers } from "./components/provider";
+import RentModal from "./components/modals/Rent";
 
 export const metadata = {
   title: "Hestia",
@@ -26,6 +27,7 @@ export default async function RootLayout({
           <ClientOnly>
             <LoginModal />
             <RegisterModal />
+            <RentModal />
             <Navbar currentUser={currentUser} />
           </ClientOnly>
           <main>{children}</main>
