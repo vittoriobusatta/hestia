@@ -1,0 +1,221 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-21.248870086645, 55.32083910264]
+      },
+      "properties": { "code": "97401", "name": "Avirons", "flag": "🇷🇪" }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-21.005907766425, 55.700687024779]
+      },
+      "properties": { "code": "97402", "name": "Bras-Panon", "flag": "🇷🇪" }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-21.246191077436976, 55.470299861949684]
+      },
+      "properties": { "code": "97403", "name": "Entre-Deux", "flag": "🇷🇪" }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-21.263482578031216, 55.367015068956306]
+      },
+      "properties": {
+        "code": "97404",
+        "name": "\u00c9tang-Sal\u00e9",
+        "flag": "🇷🇪"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-21.372561699758, 55.583106681023]
+      },
+      "properties": { "code": "97405", "name": "Petite-\u00cele", "flag": "🇷🇪" }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-21.20315943628, 55.660715903941]
+      },
+      "properties": {
+        "code": "97406",
+        "name": "Plaine-des-Palmistes",
+        "flag": "🇷🇪"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-20.957735641539, 55.277506140412]
+      },
+      "properties": { "code": "97407", "name": "Le Port", "flag": "🇷🇪" }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-20.930897082781115, 55.334508178934044]
+      },
+      "properties": { "code": "97408", "name": "Possession", "flag": "🇷🇪" }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-20.947512562777177, 55.64609827121325]
+      },
+      "properties": {
+        "code": "97409",
+        "name": "Saint-Andr\u00e9",
+        "flag": "🇷🇪"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-21.042840282651213, 55.71923503851832]
+      },
+      "properties": {
+        "code": "97410",
+        "name": "Saint-Beno\u00eet",
+        "flag": "🇷🇪"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-20.88169980733595, 55.4495624433014]
+      },
+      "properties": { "code": "97411", "name": "Saint-Denis", "flag": "🇷🇪" }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-21.37473592669963, 55.616855389666824]
+      },
+      "properties": { "code": "97412", "name": "Saint-Joseph", "flag": "🇷🇪" }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-21.16527219048936, 55.287988271787185]
+      },
+      "properties": { "code": "97413", "name": "Saint-Leu", "flag": "🇷🇪" }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-21.281801504065427, 55.41348297506221]
+      },
+      "properties": { "code": "97414", "name": "Saint-Louis", "flag": "🇷🇪" }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-20.998048062049023, 55.27990026982931]
+      },
+      "properties": { "code": "97415", "name": "Saint-Paul", "flag": "🇷🇪" }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-21.339141333039976, 55.477113114266274]
+      },
+      "properties": { "code": "97416", "name": "Saint-Pierre", "flag": "🇷🇪" }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-21.355614979468555, 55.77324669300151]
+      },
+      "properties": { "code": "97417", "name": "Saint-Philippe", "flag": "🇷🇪" }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-20.90096463582256, 55.55214918968966]
+      },
+      "properties": { "code": "97418", "name": "Sainte-Marie", "flag": "🇷🇪" }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-21.132619814160932, 55.7920833247706]
+      },
+      "properties": { "code": "97419", "name": "Sainte-Rose", "flag": "🇷🇪" }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-20.903153374110005, 55.5967072075791]
+      },
+      "properties": { "code": "97420", "name": "Sainte-Suzanne", "flag": "🇷🇪" }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-21.024304199480156, 55.543693208723255]
+      },
+      "properties": { "code": "97421", "name": "Salazie", "flag": "🇷🇪" }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-21.27642983225384, 55.51637734185056]
+      },
+      "properties": { "code": "97422", "name": "Tampon", "flag": "🇷🇪" }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-21.108255419690863, 55.29864172243495]
+      },
+      "properties": { "code": "97423", "name": "Trois-Bassins", "flag": "🇷🇪" }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-21.13466863212024, 55.47355476078974]
+      },
+      "properties": { "code": "97424", "name": "Cilaos", "flag": "🇷🇪" }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-21.050899789616295, 55.22310957285359]
+      },
+      "properties": { "code": "97434", "name": "Saint-Gilles-les-Bains", "flag": "🇷🇪" }
+    }
+  ]
+}
