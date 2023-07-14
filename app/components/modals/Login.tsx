@@ -56,47 +56,51 @@ function Login() {
   }, [loginModal, registerModal]);
 
   const BodyContent = (
-    <div>
-      <h1>Welcome back, Login to your account!</h1>
-      <Input
-        id="email"
-        label="Email"
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-      />
-      <Input
-        id="password"
-        label="Password"
-        type="password"
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-      />
-    </div>
+    <>
+      <h1 className="modal__body__title">Welcome back, Login to your account!</h1>
+      <form>
+        <Input
+          id="email"
+          label="Email"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+        <Input
+          id="password"
+          label="Password"
+          type="password"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+      </form>
+    </>
   );
 
   const FooterContent = (
-    <div>
-      <Button
-        outline 
-        label="Continue with Google"
-        icon={FcGoogle}
-        onClick={() => signIn('google')}
-      />
-      <Button 
-        outline 
-        label="Continue with Github"
-        icon={AiFillGithub}
-        onClick={() => signIn('github')}
-      />
+    <>
+      <div className="modal__footer__buttons">
+        <Button
+          outline
+          label="Continue with Google"
+          icon={FcGoogle}
+          onClick={() => signIn("google")}
+        />
+        <Button
+          outline
+          label="Continue with Github"
+          icon={AiFillGithub}
+          onClick={() => signIn("github")}
+        />
+      </div>
       <p>
-        First time using Airbnb?
-        <span onClick={onToggle}>Create an account</span>
+        First time using Hestia?
+        <span onClick={onToggle}> Create an account</span>
       </p>
-    </div>
+    </>
   );
 
   return (

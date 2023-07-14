@@ -51,63 +51,68 @@ function Register() {
   }, [registerModal, loginModal]);
 
   const bodyContent = (
-    <form className="form">
-      <h1>Welcome to Hestia, Create an account!</h1>
-      <Input
-        id="name"
-        label="Name"
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-      />
-      <Input
-        id="email"
-        label="Email"
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-      />
-      <Input
-        id="password"
-        label="Password"
-        type="password"
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-        strenghtLabel={true}
-      />
-    </form>
+    <>
+      <h1 className="modal__body__title">Welcome to Hestia, Create an account!</h1>
+      <form className="form">
+        <Input
+          id="name"
+          label="Name"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+        <Input
+          id="email"
+          label="Email"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+        <Input
+          id="password"
+          label="Password"
+          type="password"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+          strenghtLabel={true}
+        />
+      </form>
+    </>
   );
 
   const FooterConent = (
-    <div className="form__group">
-      <Button
-        outline
-        label="Continue with Google"
-        icon={FcGoogle}
-        onClick={() => signIn("google")}
-      />
-      <Button
-        outline
-        label="Continue with Github"
-        icon={AiFillGithub}
-        onClick={() => signIn("github")}
-      />
+    <>
+      <div className="modal__footer__buttons">
+        <Button
+          outline
+          label="Continue with Google"
+          icon={FcGoogle}
+          onClick={() => signIn("google")}
+          classname="google"
+        />
+        <Button
+          outline
+          label="Continue with Github"
+          icon={AiFillGithub}
+          onClick={() => signIn("github")}
+        />
+      </div>
       <p>
         Already have an account?
         <span onClick={onToggle}> Log in</span>
       </p>
-    </div>
+    </>
   );
 
   return (
     <Modal
       isOpen={registerModal.isOpen}
       onClose={registerModal.onClose}
-      title="Register"
+      title="Sign up"
       body={bodyContent}
       footer={FooterConent}
       onSubmit={handleSubmit(onSubmit)}

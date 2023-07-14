@@ -1,8 +1,4 @@
-import React, {
-  ReactNode,
-  useEffect,
-  useState,
-} from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 
 interface InputProps {
@@ -63,10 +59,9 @@ const Input: React.FC<InputProps> = ({
               }.`,
             },
           })}
-          placeholder={placeholder}
+          placeholder={label}
           type={type}
         />
-        <label>{label}</label>
       </div>
       {errors[id] && (
         <p className="form__error">

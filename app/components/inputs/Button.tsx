@@ -9,6 +9,7 @@ interface ButtonProps {
   outline?: boolean;
   small?: boolean;
   icon?: React.FC<{ size: number }>;
+  classname?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -18,11 +19,16 @@ const Button: React.FC<ButtonProps> = ({
   outline,
   small,
   icon: Icon,
+  classname,
 }) => {
   return (
-    <button disabled={disabled} onClick={onClick}>
-      {Icon && <Icon size={24} />}
-      {label}
+    <button disabled={disabled} onClick={onClick} className={`button`}>
+      {Icon && (
+        <div className="button__icon">
+          <Icon size={20} />
+        </div>
+      )}
+      <div className="button__text">{label}</div>
     </button>
   );
 };
