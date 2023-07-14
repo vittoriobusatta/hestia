@@ -6,6 +6,8 @@ import { useMemo, useState } from "react";
 import { categories } from "../navbar//Categories";
 import CategoryInput from "../inputs/CategoryInput";
 import { FieldValues, useForm } from "react-hook-form";
+import CitiesSelect from "../inputs/CitiesSelect";
+import dynamic from "next/dynamic";
 
 enum STEPS {
   CATEGORY = 0,
@@ -42,7 +44,16 @@ const RentModal = () => {
     },
   });
 
-  const category = watch("category");  
+  const category = watch("category");
+  const location = watch("location");
+
+  const Map = useMemo(
+    () =>
+      dynamic(() => import("../map/Map"), {
+        ssr: false,
+      }),
+    [location]
+  );
 
   const onBack = () => {
     setStep((value) => value - 1);
@@ -76,12 +87,10 @@ const RentModal = () => {
     });
   };
 
-  
-
   let bodyContent = (
     <div className="categories">
       <div className="categories__title">
-        <h1>Which of these best describes your place ?</h1>
+        <h1>Which of these best describes your place?</h1>
         <h4>Pick a category</h4>
       </div>
       <div className="categories__list">
@@ -98,12 +107,30 @@ const RentModal = () => {
     </div>
   );
 
+  if (step === STEPS.LOCATION) {
+    bodyContent = (
+      <div className="location">
+        <div className="categories__title">
+          <h1>Where is your place located?</h1>
+          <h4>Help guests find you!</h4>
+        </div>
+        <CitiesSelect
+          value={location}
+          onChange={(value) => setCustomValue("location", value)}
+        />
+        <Map center={location?.latlng} />
+      </div>
+    );
+  }
+
+  console.log(location);
+
   return (
     <Modal
       disabled={isLoading}
       isOpen={rentModal.isOpen}
       onClose={rentModal.onClose}
-      onSubmit={rentModal.onClose}
+      onSubmit={onNext}
       title="Hestia your home!"
       actionLabel={actionLabel}
       secondaryActionLabel={secondaryActionLabel}

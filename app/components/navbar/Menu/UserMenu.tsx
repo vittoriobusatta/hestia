@@ -36,7 +36,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   return (
     <div className="user">
       <button className="user-button" onClick={onRent}>
-        Hestia your home
+        Rent your home
       </button>
       <div className="user-menu">
         <button className="user-menu-container" onClick={toggleOpen}>
