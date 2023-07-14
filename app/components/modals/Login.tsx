@@ -116,6 +116,7 @@ function Login() {
       body={BodyContent}
       footer={FooterContent}
       onSubmit={handleSubmit(onSubmit)}
+      actionLabel="Continue"
     ></Modal>
   );
 }
