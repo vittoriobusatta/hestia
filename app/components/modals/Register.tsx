@@ -121,6 +121,7 @@ function Register() {
       body={bodyContent}
       footer={FooterConent}
       onSubmit={handleSubmit(onSubmit)}
+      actionLabel="Continue"
     ></Modal>
   );
 }

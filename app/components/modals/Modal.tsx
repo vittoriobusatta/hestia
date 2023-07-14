@@ -150,42 +150,44 @@ const Modal: React.FC<ModalProps> = ({
                 <h2>{title}</h2>
               </div>
             </header>
-            <div className="modal__body">
-              {body}
-              <button
-                className="modal__submit"
-                onClick={handleSubmit}
-                ref={submitRef}
-              >
-                <span className="modal__submit__background">
-                  <span
-                    className="modal__submit__background__hover"
-                    style={
-                      {
-                        "--mouse-x": `${x}`,
-                        "--mouse-y": `${y}`,
-                      } as React.CSSProperties
-                    }
+            <div className="modal__body">{body}</div>
+
+            {/* {footer && <div className="modal__footer">{footer}</div>} */}
+            <div className="modal__footer">
+              <div className="modal__actions">
+                {secondaryAction && secondaryActionLabel && (
+                  <Button
+                    disabled={disabled}
+                    label={secondaryActionLabel}
+                    onClick={handleSecondaryAction}
+                    outline
                   />
-                </span>
-                <span
-                  className="
+                )}
+                <button
+                  className="modal__submit"
+                  onClick={handleSubmit}
+                  ref={submitRef}
+                >
+                  <span className="modal__submit__background">
+                    <span
+                      className="modal__submit__background__hover"
+                      style={
+                        {
+                          "--mouse-x": `${x}`,
+                          "--mouse-y": `${y}`,
+                        } as React.CSSProperties
+                      }
+                    />
+                  </span>
+                  <span
+                    className="
                 modal__submit__text
                 "
-                >
-                  {actionLabel}
-                </span>
-              </button>
-            </div>
-            <div className="modal__footer">
-              {secondaryAction && secondaryActionLabel && (
-                <Button
-                  disabled={disabled}
-                  label={secondaryActionLabel}
-                  onClick={handleSecondaryAction}
-                  outline
-                />
-              )}
+                  >
+                    {actionLabel}
+                  </span>
+                </button>
+              </div>
               {footer}
             </div>
           </div>

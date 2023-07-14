@@ -29,6 +29,7 @@ html {
   -ms-overflow-style: none;
   scrollbar-width: none;
   font-family: $fontFamily;
+  background-color: #f1f1f1;
   @media screen and (max-width: 1400px) {
     font-size: 58%;
   }
