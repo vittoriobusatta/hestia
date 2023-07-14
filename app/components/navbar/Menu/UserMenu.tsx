@@ -51,7 +51,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 
       {isOpen && (
         <div className="user-connect">
-          <div className="user-connect-list">
+          <ul className="user-connect-list">
             {currentUser ? (
               <>
                 <MenuItem
@@ -74,11 +74,11 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
               </>
             ) : (
               <>
-                <MenuItem label="Login" onClick={loginModal.onOpen} />
                 <MenuItem label="Sign up" onClick={registerModal.onOpen} />
+                <MenuItem label="Login" onClick={loginModal.onOpen} />
               </>
             )}
-          </div>
+          </ul>
         </div>
       )}
     </div>

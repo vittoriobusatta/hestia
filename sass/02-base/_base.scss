@@ -28,6 +28,7 @@ html {
   scroll-behavior: smooth;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  font-family: $fontFamily;
   @media screen and (max-width: 1400px) {
     font-size: 58%;
   }
@@ -51,12 +52,15 @@ html {
 main {
   margin-top: 66px;
   min-height: calc(100vh - 66px);
+  padding: 0 $gap;
   @media screen and (min-width: 576px) {
     margin-top: 74px;
+    padding: 0 $gap;
     min-height: calc(100vh - 74px);
   }
   @media screen and (min-width: 992px) {
     margin-top: 82px;
+    padding: 0 $gap;
     min-height: calc(100vh - 82px);
   }
 }
