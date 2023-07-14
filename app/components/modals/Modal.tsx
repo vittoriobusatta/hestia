@@ -1,13 +1,13 @@
 "use client";
 
 import React, {
-  CSSProperties,
   ReactElement,
   useCallback,
   useEffect,
   useRef,
   useState,
 } from "react";
+import Button from "../inputs/Button";
 
 interface ModalProps {
   isOpen?: boolean;
@@ -16,6 +16,10 @@ interface ModalProps {
   body?: ReactElement;
   footer?: ReactElement;
   onSubmit?: () => void;
+  actionLabel: string;
+  disabled?: boolean;
+  secondaryAction?: () => void;
+  secondaryActionLabel?: string;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -25,6 +29,10 @@ const Modal: React.FC<ModalProps> = ({
   body,
   footer,
   onSubmit,
+  actionLabel,
+  disabled,
+  secondaryAction,
+  secondaryActionLabel,
 }) => {
   const [showModal, setShowModal] = useState(isOpen);
   const submitRef = useRef<HTMLButtonElement>(null);
@@ -88,6 +96,32 @@ const Modal: React.FC<ModalProps> = ({
   }),
     [showModal];
 
+  useEffect(() => {
+    setShowModal(isOpen);
+  }, [isOpen]);
+
+  const handleSubmit = useCallback(() => {
+    if (disabled) {
+      return;
+    }
+
+    if (onSubmit) {
+      onSubmit();
+    }
+  }, [onSubmit, disabled]);
+
+  const handleSecondaryAction = useCallback(() => {
+    if (disabled || !secondaryAction) {
+      return;
+    }
+
+    secondaryAction();
+  }, [secondaryAction, disabled]);
+
+  if (!isOpen) {
+    return null;
+  }
+
   return (
     <>
       {showModal && (
@@ -120,7 +154,7 @@ const Modal: React.FC<ModalProps> = ({
               {body}
               <button
                 className="modal__submit"
-                onClick={onSubmit}
+                onClick={handleSubmit}
                 ref={submitRef}
               >
                 <span className="modal__submit__background">
@@ -139,11 +173,21 @@ const Modal: React.FC<ModalProps> = ({
                 modal__submit__text
                 "
                 >
-                  {title}
+                  {actionLabel}
                 </span>
               </button>
             </div>
-            <div className="modal__footer">{footer}</div>
+            <div className="modal__footer">
+              {secondaryAction && secondaryActionLabel && (
+                <Button
+                  disabled={disabled}
+                  label={secondaryActionLabel}
+                  onClick={handleSecondaryAction}
+                  outline
+                />
+              )}
+              {footer}
+            </div>
           </div>
         </div>
       )}
