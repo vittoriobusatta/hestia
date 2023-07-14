@@ -12,7 +12,10 @@
     align-items: center;
   }
   &__close {
-    flex-shrink: 2;
+    height: 16px;
+    & button {
+      @include full_hw;
+    }
   }
   &__title {
     flex: 1 1 0;
