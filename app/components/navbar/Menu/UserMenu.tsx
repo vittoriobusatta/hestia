@@ -35,9 +35,11 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 
   return (
     <div className="user">
-      <button className="user-button" onClick={onRent}>
-        Rent your home
-      </button>
+      <MenuItem
+        label="Rent your home"
+        onClick={onRent}
+        className="rent__button"
+      />
       <div className="user-menu">
         <button className="user-menu-container" onClick={toggleOpen}>
           <svg
@@ -79,6 +81,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                   label="My properties"
                   onClick={() => router.push("/properties")}
                 />
+                <MenuItem label="Rent your home" onClick={rentModal.onOpen} />
+                <hr />
                 <MenuItem label="Logout" onClick={() => signOut()} />
               </>
             ) : (

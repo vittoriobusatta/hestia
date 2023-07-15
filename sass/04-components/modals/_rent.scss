@@ -69,7 +69,43 @@
     gap: 1rem;
     color: #718096;
     &--filled {
-        border: none;
+      border: none;
     }
   }
 }
+picture {
+    --aspect_ratio_wrapper-ratio: 20 / 19;
+    aspect-ratio: var(--aspect_ratio_wrapper-ratio, unset);
+  }
+  
+  .picture__content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+  }
+  .picture__head {
+    & h3 {
+      font-size: 14px;
+      font-weight: 500;
+      color: #222222;
+      font-family: $fontFamily;
+    }
+  }
+  
+  .picture__category {
+    color: #b0b0b0;
+  }
+  
+  .picture__body,
+  .picture__category {
+    font-size: 12px;
+    font-weight: 500;
+    font-family: $fontFamily;
+  }
+  
+  .rent__button {
+    display: none;
+    @media screen and (min-width: 992px) {
+      display: block;
+    }
+  }
