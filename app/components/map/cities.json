@@ -215,7 +215,23 @@
         "type": "Polygon",
         "coordinates": [-21.050899789616295, 55.22310957285359]
       },
-      "properties": { "code": "97434", "name": "Saint-Gilles-les-Bains", "flag": "🇷🇪" }
+      "properties": {
+        "code": "97434",
+        "name": "Saint-Gilles-les-Bains",
+        "flag": "🇷🇪"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [-21.09368826257635, 55.23747012851388],
+        "type": "Point"
+      },
+      "properties": {
+        "code": "97435",
+        "name": "La Saline-les-bains",
+        "flag": "🇷🇪"
+      }
     }
   ]
 }
