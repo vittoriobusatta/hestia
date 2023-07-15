@@ -51,4 +51,25 @@
       font-family: $fontFamily;
     }
   }
+  &__image__upload {
+    position: relative;
+    cursor: pointer;
+    opacity: 1;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+    border-style: dashed;
+    border-width: 2px;
+    padding: 122px;
+    border-color: #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    color: #718096;
+    &--filled {
+        border: none;
+    }
+  }
 }
