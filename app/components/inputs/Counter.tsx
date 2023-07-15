@@ -29,17 +29,17 @@ const Counter: React.FC<CounterProps> = ({
   }, [onChange, value]);
 
   return (
-    <div className="rent__counter">
-      <div className="rent__counter__head">
-        <div className="rent__counter__title">{title}</div>
-        <div className="rent__counter__subtitle">{subtitle}</div>
+    <div className="modal__counter">
+      <div className="modal__counter__head">
+        <h2 className="modal__counter__title">{title}</h2>
+        <h5 className="modal__counter__subtitle">{subtitle}</h5>
       </div>
-      <div className="rent__counter__actions">
-        <button className="rent__counter__button" onClick={onReduce}>
+      <div className="modal__counter__actions">
+        <button className="modal__counter__button" onClick={onReduce}>
           <AiOutlineMinus />
         </button>
-        <p className="rent__counter__value">{value}</p>
-        <button className="rent__counter__button" onClick={onAdd}>
+        <p className="modal__counter__value">{value}</p>
+        <button className="modal__counter__button" onClick={onAdd}>
           <AiOutlinePlus />
         </button>
       </div>
