@@ -1,13 +1,13 @@
 "use client";
 
 import React, {
-  CSSProperties,
   ReactElement,
   useCallback,
   useEffect,
   useRef,
   useState,
 } from "react";
+import Button from "../inputs/Button";
 
 interface ModalProps {
   isOpen?: boolean;
@@ -16,6 +16,10 @@ interface ModalProps {
   body?: ReactElement;
   footer?: ReactElement;
   onSubmit?: () => void;
+  actionLabel: string;
+  disabled?: boolean;
+  secondaryAction?: () => void;
+  secondaryActionLabel?: string;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -25,6 +29,10 @@ const Modal: React.FC<ModalProps> = ({
   body,
   footer,
   onSubmit,
+  actionLabel,
+  disabled,
+  secondaryAction,
+  secondaryActionLabel,
 }) => {
   const [showModal, setShowModal] = useState(isOpen);
   const submitRef = useRef<HTMLButtonElement>(null);
@@ -88,6 +96,32 @@ const Modal: React.FC<ModalProps> = ({
   }),
     [showModal];
 
+  useEffect(() => {
+    setShowModal(isOpen);
+  }, [isOpen]);
+
+  const handleSubmit = useCallback(() => {
+    if (disabled) {
+      return;
+    }
+
+    if (onSubmit) {
+      onSubmit();
+    }
+  }, [onSubmit, disabled]);
+
+  const handleSecondaryAction = useCallback(() => {
+    if (disabled || !secondaryAction) {
+      return;
+    }
+
+    secondaryAction();
+  }, [secondaryAction, disabled]);
+
+  if (!isOpen) {
+    return null;
+  }
+
   return (
     <>
       {showModal && (
@@ -116,37 +150,46 @@ const Modal: React.FC<ModalProps> = ({
                 <h2>{title}</h2>
               </div>
             </header>
-            <div className="modal__body">
-              {body}
-              <button
-                className="modal__submit"
-                onClick={onSubmit}
-                ref={submitRef}
-              >
-                <span className="modal__submit__background">
-                  <span
-                    className="modal__submit__background__hover"
-                    style={
-                      {
-                        "--mouse-x": `${x}`,
-                        "--mouse-y": `${y}`,
-                      } as React.CSSProperties
-                    }
+            <div className="modal__body">{body}</div>
+
+            {/* {footer && <div className="modal__footer">{footer}</div>} */}
+            <div className="modal__footer">
+              <div className="modal__actions">
+                {secondaryAction && secondaryActionLabel && (
+                  <Button
+                    disabled={disabled}
+                    label={secondaryActionLabel}
+                    onClick={handleSecondaryAction}
+                    outline
                   />
-                </span>
-                <span
-                  className="
+                )}
+                <button
+                  className="modal__submit"
+                  onClick={handleSubmit}
+                  ref={submitRef}
+                >
+                  <span className="modal__submit__background">
+                    <span
+                      className="modal__submit__background__hover"
+                      style={
+                        {
+                          "--mouse-x": `${x}`,
+                          "--mouse-y": `${y}`,
+                        } as React.CSSProperties
+                      }
+                    />
+                  </span>
+                  <span
+                    className="
                 modal__submit__text
                 "
-                >
-                  {title}
-                </span>
-              </button>
+                  >
+                    {actionLabel}
+                  </span>
+                </button>
+              </div>
+              {footer}
             </div>
-            <div className="modal__separator">
-              <div className="modal__separator__text">or</div>
-            </div>
-            <div className="modal__footer">{footer}</div>
           </div>
         </div>
       )}

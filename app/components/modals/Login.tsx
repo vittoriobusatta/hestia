@@ -57,7 +57,9 @@ function Login() {
 
   const BodyContent = (
     <>
-      <h1 className="modal__body__title">Welcome back, Login to your account!</h1>
+      <h1 className="modal__body__title">
+        Welcome back, Login to your account!
+      </h1>
       <form>
         <Input
           id="email"
@@ -82,6 +84,9 @@ function Login() {
 
   const FooterContent = (
     <>
+      <div className="modal__separator">
+        <div className="modal__separator__text">or</div>
+      </div>
       <div className="modal__footer__buttons">
         <Button
           outline
@@ -111,6 +116,7 @@ function Login() {
       body={BodyContent}
       footer={FooterContent}
       onSubmit={handleSubmit(onSubmit)}
+      actionLabel="Continue"
     ></Modal>
   );
 }

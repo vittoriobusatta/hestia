@@ -8,6 +8,7 @@ import useLoginModal from "../../../hooks/useLoginModal";
 import useRegisterModal from "../../../hooks/useRegisterModal";
 import MenuItem from "./MenuItem";
 import Avatar from "../../Avatar";
+import useRentModal from "@/app/hooks/useRentModal";
 
 interface UserMenuProps {
   currentUser?: SafeUser | null;
@@ -18,6 +19,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
+  const rentModal = useRentModal();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -25,10 +27,19 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     setIsOpen((value) => !value);
   }, []);
 
-  
+  const onRent = useCallback(() => {
+    if (currentUser) {
+      return rentModal.onOpen();
+    }
+  }, [currentUser, rentModal]);
 
   return (
     <div className="user">
+      <MenuItem
+        label="Rent your home"
+        onClick={onRent}
+        className="rent__button"
+      />
       <div className="user-menu">
         <button className="user-menu-container" onClick={toggleOpen}>
           <svg
@@ -70,6 +81,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                   label="My properties"
                   onClick={() => router.push("/properties")}
                 />
+                <MenuItem label="Rent your home" onClick={rentModal.onOpen} />
+                <hr />
                 <MenuItem label="Logout" onClick={() => signOut()} />
               </>
             ) : (

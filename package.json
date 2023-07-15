@@ -21,16 +21,21 @@
     "graphql-tag": "^2.12.6",
     "next": "13.4.9",
     "next-auth": "^4.22.1",
+    "next-cloudinary": "^4.14.1",
+    "query-string": "^8.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.45.1",
     "react-icons": "^4.10.1",
+    "react-leaflet": "^4.2.1",
+    "react-select": "^5.7.4",
     "sass": "^1.63.6",
     "typescript": "5.1.6",
     "zustand": "^4.3.9"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/leaflet": "^1.9.3",
     "prisma": "^5.0.0"
   }
 }

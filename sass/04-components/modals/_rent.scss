@@ -1,0 +1,111 @@
+.modal {
+  &__info {
+    display: flex;
+    flex-direction: column;
+    row-gap: 22px;
+  }
+  &__counter {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    &__actions {
+      display: inline-flex;
+      justify-content: space-between;
+      align-items: center;
+      min-width: 100px;
+      width: 25vw;
+      max-width: 120px;
+    }
+    &__button {
+      background-color: transparent;
+      cursor: pointer;
+      border: solid 1px #e5e5e5;
+      border-radius: 100%;
+      padding: 10px;
+      height: fit-content;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      &:disabled {
+        cursor: not-allowed;
+      }
+    }
+    &__value {
+      font-size: 16px;
+      font-weight: 500;
+      color: #222222;
+      font-family: $fontFamily;
+    }
+    &__title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #222222;
+      font-family: $fontFamily;
+    }
+    &__subtitle {
+      font-size: 14px;
+      font-weight: 500;
+      color: #b0b0b0;
+      font-family: $fontFamily;
+    }
+  }
+  &__image__upload {
+    position: relative;
+    cursor: pointer;
+    opacity: 1;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+    border-style: dashed;
+    border-width: 2px;
+    padding: 122px;
+    border-color: #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    color: #718096;
+    &--filled {
+      border: none;
+    }
+  }
+}
+picture {
+    --aspect_ratio_wrapper-ratio: 20 / 19;
+    aspect-ratio: var(--aspect_ratio_wrapper-ratio, unset);
+  }
+  
+  .picture__content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+  }
+  .picture__head {
+    & h3 {
+      font-size: 14px;
+      font-weight: 500;
+      color: #222222;
+      font-family: $fontFamily;
+    }
+  }
+  
+  .picture__category {
+    color: #b0b0b0;
+  }
+  
+  .picture__body,
+  .picture__category {
+    font-size: 12px;
+    font-weight: 500;
+    font-family: $fontFamily;
+  }
+  
+  .rent__button {
+    display: none;
+    @media screen and (min-width: 992px) {
+      display: block;
+    }
+  }

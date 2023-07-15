@@ -11,8 +11,15 @@
   @media screen and (min-width: 576px) {
     align-items: center;
   }
+  &__actions {
+    display: inline-flex;
+    column-gap: 18px;
+  }
   &__close {
-    flex-shrink: 2;
+    height: 16px;
+    & button {
+      @include full_hw;
+    }
   }
   &__title {
     flex: 1 1 0;
@@ -118,6 +125,27 @@
     flex-direction: column;
     row-gap: 22px;
     padding: 0 18px;
+    &__content {
+      display: flex;
+      flex-direction: column;
+      row-gap: 22px;
+      &.info {
+        row-gap: 44px;
+        padding-bottom: 44px;
+      }
+    }
+    &__head {
+      & h1 {
+        font-size: 18px;
+        color: #222222;
+        font-family: $fontFamily;
+      }
+      & h4 {
+        font-size: 14px;
+        color: #b0b0b0;
+        font-family: $fontFamily;
+      }
+    }
     &__title {
       font-size: 18px;
       font-weight: 500;
@@ -177,5 +205,83 @@
 form {
   display: flex;
   flex-direction: column;
-  row-gap: 4px;
 }
+
+.categories__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+.categories__item {
+  width: calc(50% - 6px);
+  border: solid 1px #e5e5e5;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  &:hover {
+    background-color: #f5f5f5;
+  }
+  &--selected {
+    background-color: #047cd7;
+    color: #fff;
+    &:hover {
+      background-color: #047cd7;
+    }
+  }
+  &__text {
+    font-size: 12px;
+  }
+}
+
+.leaflet-bottom,
+.leaflet-control,
+.leaflet-pane,
+.leaflet-top {
+  z-index: 0 !important;
+}
+
+.map__container {
+  height: 35vh;
+  background-color: #f5f5f5;
+}
+
+.map {
+  height: 35vh;
+  border-radius: 8px;
+}
+
+.location {
+  display: flex;
+  flex-direction: column;
+  row-gap: 22px;
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  row-gap: 22px;
+}
+
+.select__content {
+  display: inline-flex;
+  align-items: baseline;
+  column-gap: 6px;
+  &__label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #222222;
+    font-family: $fontFamily;
+  }
+  &__flag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.leaflet-bottom.leaflet-right {
+  display: none;
+}
+

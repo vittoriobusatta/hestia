@@ -1,0 +1,133 @@
+.landing {
+  margin-top: 66px;
+  @media screen and (min-width: 576px) {
+    margin-top: 74px;
+  }
+  @media screen and (min-width: 992px) {
+    margin-top: 82px;
+  }
+}
+
+.home__message {
+  padding: 0 $gap;
+  & h1 {
+    color: #222222;
+    font-size: 32px;
+    font-weight: 300;
+    margin-bottom: 44px;
+    & span {
+      font-weight: 500;
+      color: #1e9de6;
+    }
+  }
+}
+
+picture {
+  --aspect_ratio_wrapper-ratio: 20 / 19;
+  aspect-ratio: var(--aspect_ratio_wrapper-ratio, unset);
+}
+
+.picture__content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+.picture__head {
+  & h3 {
+    font-size: 14px;
+    font-weight: 500;
+    color: #222222;
+    font-family: $fontFamily;
+  }
+}
+
+.picture__category {
+  color: #b0b0b0;
+}
+
+.picture__body,
+.picture__category {
+  font-size: 12px;
+  font-weight: 500;
+  font-family: $fontFamily;
+}
+
+.rent__button {
+  display: none;
+  @media screen and (min-width: 992px) {
+    display: block;
+  }
+}
+
+.listing {
+  padding: 0 $gap;
+  --breakpoint-grid_columns: 1;
+  --breakpoint-grid_column-gap: 24px;
+  --breakpoint-grid_row-gap: 40px;
+  @media screen and (min-width: 576px) {
+    --breakpoint-grid_columns: 2;
+  }
+  @media screen and (min-width: 768px) {
+    --breakpoint-grid_columns: 3;
+  }
+  @media screen and (min-width: 992px) {
+    --breakpoint-grid_columns: 4;
+  }
+  display: grid;
+  grid-template-columns: repeat(
+    var(--breakpoint-grid_columns, 1),
+    minmax(0, 1fr)
+  );
+
+  grid-gap: var(--breakpoint-grid_row-gap, 0)
+    var(--breakpoint-grid_column-gap, 0);
+  & li {
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+    & picture {
+      border-radius: 8px;
+      overflow: hidden;
+      & img {
+        @include full_hw;
+        object-fit: cover;
+      }
+    }
+    &__title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #222222;
+      font-family: $fontFamily;
+    }
+    &__price {
+      font-size: 14px;
+      font-weight: 500;
+      color: #222222;
+      font-family: $fontFamily;
+    }
+    &__location {
+      font-size: 14px;
+      font-weight: 500;
+      color: #b0b0b0;
+      font-family: $fontFamily;
+    }
+  }
+}
+.categories__container {
+  padding: 0 $gap 44px;
+}
+.categories__container__list {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  overflow-x: auto;
+  column-gap: 22px;
+  & button {
+    flex: 1;
+  }
+  ::-webkit-scrollbar {
+    height: 2px;
+    background-color: #faf7ee;
+  }
+}

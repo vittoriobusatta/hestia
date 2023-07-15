@@ -7,15 +7,15 @@
   text-shadow: none;
 }
 
-::-webkit-scrollbar {
-  width: 10px;
-  background-color: #faf7ee;
-}
+// ::-webkit-scrollbar {
+//   width: 10px;
+//   background-color: #faf7ee;
+// }
 
-::-webkit-scrollbar-thumb {
-  background: #e1d2c1;
-  border-radius: 15px;
-}
+// ::-webkit-scrollbar-thumb {
+//   background: #e1d2c1;
+//   border-radius: 15px;
+// }
 
 @supports (padding: env(safe-area-inset-top)) {
   body {
@@ -46,21 +46,5 @@ html {
   }
   @media screen and (max-width: 321px) {
     font-size: 28%;
-  }
-}
-
-main {
-  margin-top: 66px;
-  min-height: calc(100vh - 66px);
-  padding: 0 $gap;
-  @media screen and (min-width: 576px) {
-    margin-top: 74px;
-    padding: 0 $gap;
-    min-height: calc(100vh - 74px);
-  }
-  @media screen and (min-width: 992px) {
-    margin-top: 82px;
-    padding: 0 $gap;
-    min-height: calc(100vh - 82px);
   }
 }
