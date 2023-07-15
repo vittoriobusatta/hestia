@@ -125,6 +125,27 @@
     flex-direction: column;
     row-gap: 22px;
     padding: 0 18px;
+    &__content {
+      display: flex;
+      flex-direction: column;
+      row-gap: 22px;
+      &.info {
+        row-gap: 44px;
+        padding-bottom: 44px;
+      }
+    }
+    &__head {
+      & h1 {
+        font-size: 18px;
+        color: #222222;
+        font-family: $fontFamily;
+      }
+      & h4 {
+        font-size: 14px;
+        color: #b0b0b0;
+        font-family: $fontFamily;
+      }
+    }
     &__title {
       font-size: 18px;
       font-weight: 500;
@@ -213,20 +234,6 @@ form {
     font-size: 12px;
   }
 }
-.categories__title {
-  // padding-bottom: 18px;
-  & h1 {
-    font-size: 18px;
-    color: #222222;
-    font-family: $fontFamily;
-    // padding-bottom: 6px;
-  }
-  & h4 {
-    font-size: 14px;
-    color: #b0b0b0;
-    font-family: $fontFamily;
-  }
-}
 
 .leaflet-bottom,
 .leaflet-control,
@@ -246,8 +253,15 @@ form {
   row-gap: 22px;
 }
 
+.categories {
+  display: flex;
+  flex-direction: column;
+  row-gap: 22px;
+}
+
 .select__content {
   display: inline-flex;
+  align-items: baseline;
   column-gap: 6px;
   &__label {
     font-size: 14px;
@@ -265,3 +279,5 @@ form {
 .leaflet-bottom.leaflet-right {
   display: none;
 }
+
+

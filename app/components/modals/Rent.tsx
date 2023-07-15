@@ -8,6 +8,7 @@ import CategoryInput from "../inputs/CategoryInput";
 import { FieldValues, useForm } from "react-hook-form";
 import CitiesSelect from "../inputs/CitiesSelect";
 import dynamic from "next/dynamic";
+import Counter from "../inputs/Counter";
 
 enum STEPS {
   CATEGORY = 0,
@@ -46,6 +47,9 @@ const RentModal = () => {
 
   const category = watch("category");
   const location = watch("location");
+  const guestCount = watch("guestCount");
+  const roomCount = watch("roomCount");
+  const bathroomCount = watch("bathroomCount");
 
   const Map = useMemo(
     () =>
@@ -87,43 +91,78 @@ const RentModal = () => {
     });
   };
 
-  let bodyContent = (
-    <div className="categories">
-      <div className="categories__title">
-        <h1>Which of these best describes your place?</h1>
-        <h4>Pick a category</h4>
-      </div>
-      <div className="categories__list">
-        {categories.map((item) => (
-          <CategoryInput
-            key={item.label}
-            onClick={(category) => setCustomValue("category", category)}
-            selected={category === item.label}
-            label={item.label}
-            icon={item.icon}
+  let bodyContent;
+
+  switch (step) {
+    case STEPS.LOCATION:
+      bodyContent = (
+        <div className="modal__body__content">
+          <div className="modal__body__head">
+            <h1>Where is your place located?</h1>
+            <h4>Help guests find you!</h4>
+          </div>
+          <CitiesSelect
+            value={location}
+            onChange={(value) => setCustomValue("location", value)}
           />
-        ))}
-      </div>
-    </div>
-  );
-
-  if (step === STEPS.LOCATION) {
-    bodyContent = (
-      <div className="location">
-        <div className="categories__title">
-          <h1>Where is your place located?</h1>
-          <h4>Help guests find you!</h4>
+          <Map center={location?.latlng} />
         </div>
-        <CitiesSelect
-          value={location}
-          onChange={(value) => setCustomValue("location", value)}
-        />
-        <Map center={location?.latlng} />
-      </div>
-    );
-  }
+      );
+      break;
 
-  console.log(location);
+    case STEPS.INFO:
+      bodyContent = (
+        <div className="modal__body__content info">
+          <div className="modal__body__head">
+            <h1>Share some basics about your place</h1>
+            <h4>What amenitis do you have?</h4>
+          </div>
+          <Counter
+            onChange={(value) => setCustomValue("guestCount", value)}
+            value={guestCount}
+            title="Guests"
+            subtitle="How many guests do you allow?"
+          />
+          <hr />
+          <Counter
+            onChange={(value) => setCustomValue("roomCount", value)}
+            value={roomCount}
+            title="Rooms"
+            subtitle="How many rooms do you have?"
+          />
+          <hr />
+          <Counter
+            onChange={(value) => setCustomValue("bathroomCount", value)}
+            value={bathroomCount}
+            title="Bathrooms"
+            subtitle="How many bathrooms do you have?"
+          />
+        </div>
+      );
+      break;
+
+    default:
+      bodyContent = (
+        <div className="modal__body__content">
+          <div className="modal__body__head">
+            <h1>Which of these best describes your place?</h1>
+            <h4>Pick a category</h4>
+          </div>
+          <div className="categories__list">
+            {categories.map((item) => (
+              <CategoryInput
+                key={item.label}
+                onClick={(category) => setCustomValue("category", category)}
+                selected={category === item.label}
+                label={item.label}
+                icon={item.icon}
+              />
+            ))}
+          </div>
+        </div>
+      );
+      break;
+  }
 
   return (
     <Modal

@@ -1,0 +1,54 @@
+.modal {
+  &__info {
+    display: flex;
+    flex-direction: column;
+    row-gap: 22px;
+  }
+  &__counter {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    &__actions {
+      display: inline-flex;
+      justify-content: space-between;
+      align-items: center;
+      min-width: 100px;
+      width: 25vw;
+      max-width: 120px;
+    }
+    &__button {
+      background-color: transparent;
+      cursor: pointer;
+      border: solid 1px #e5e5e5;
+      border-radius: 100%;
+      padding: 10px;
+      height: fit-content;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      &:disabled {
+        cursor: not-allowed;
+      }
+    }
+    &__value {
+      font-size: 16px;
+      font-weight: 500;
+      color: #222222;
+      font-family: $fontFamily;
+    }
+    &__title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #222222;
+      font-family: $fontFamily;
+    }
+    &__subtitle {
+      font-size: 14px;
+      font-weight: 500;
+      color: #b0b0b0;
+      font-family: $fontFamily;
+    }
+  }
+}
