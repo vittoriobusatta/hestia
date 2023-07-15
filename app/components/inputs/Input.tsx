@@ -6,6 +6,7 @@ interface InputProps {
   label: string;
   type?: string;
   disabled?: boolean;
+  formatPrice?: boolean;
   required?: boolean;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors;
@@ -23,6 +24,7 @@ const Input: React.FC<InputProps> = ({
   errors,
   strenghtLabel,
   placeholder,
+  formatPrice,
 }) => {
   const [pattern, setPattern] = useState<RegExp>(/./);
 
@@ -47,6 +49,7 @@ const Input: React.FC<InputProps> = ({
   return (
     <>
       <div className="form__group">
+        {formatPrice && <span className="form__group__currency">€</span>}
         <input
           id={id}
           disabled={disabled}

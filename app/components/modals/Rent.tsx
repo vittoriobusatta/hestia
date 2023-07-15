@@ -5,11 +5,14 @@ import Modal from "./Modal";
 import { useMemo, useState } from "react";
 import { categories } from "../navbar//Categories";
 import CategoryInput from "../inputs/CategoryInput";
-import { FieldValues, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import CitiesSelect from "../inputs/CitiesSelect";
 import dynamic from "next/dynamic";
 import Counter from "../inputs/Counter";
 import ImageUpload from "../inputs/ImageUpload";
+import Input from "../inputs/Input";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 enum STEPS {
   CATEGORY = 0,
@@ -21,6 +24,7 @@ enum STEPS {
 }
 
 const RentModal = () => {
+  const router = useRouter();
   const rentModal = useRentModal();
   const [step, setStep] = useState(STEPS.CATEGORY);
   const [isLoading, setIsLoading] = useState(false);
@@ -51,7 +55,7 @@ const RentModal = () => {
   const guestCount = watch("guestCount");
   const roomCount = watch("roomCount");
   const bathroomCount = watch("bathroomCount");
-  const imageSrc = watch('imageSrc');
+  const imageSrc = watch("imageSrc");
 
   const Map = useMemo(
     () =>
@@ -66,7 +70,56 @@ const RentModal = () => {
   };
 
   const onNext = () => {
-    setStep((value) => value + 1);
+    if (stepIsValid()) {
+      setStep((value) => value + 1);
+    }
+  };
+
+  const stepIsValid = () => {
+    switch (step) {
+      case STEPS.CATEGORY:
+        return category !== "";
+      case STEPS.LOCATION:
+        return location !== null;
+      case STEPS.INFO:
+        return (
+          guestCount !== undefined &&
+          roomCount !== undefined &&
+          bathroomCount !== undefined
+        );
+      case STEPS.IMAGES:
+        return imageSrc !== "";
+      case STEPS.DESCRIPTION:
+        return true;
+      case STEPS.PRICE:
+        return true;
+      default:
+        return false;
+    }
+  };
+
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    if (step !== STEPS.PRICE) {
+      return onNext();
+    }
+
+    setIsLoading(true);
+
+    axios
+      .post("/api/listings", data)
+      .then(() => {
+        console.log("success");
+        router.refresh();
+        reset();
+        setStep(STEPS.CATEGORY);
+        rentModal.onClose();
+      })
+      .catch(() => {
+        alert("An error occured");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const actionLabel = useMemo(() => {
@@ -158,6 +211,55 @@ const RentModal = () => {
       );
       break;
 
+    case STEPS.DESCRIPTION:
+      bodyContent = (
+        <div className="modal__body__content">
+          <div className="modal__body__head">
+            <h1>How would you describe your place?</h1>
+            <h4>Short and sweet works best!</h4>
+            <Input
+              id="title"
+              label="Title"
+              disabled={isLoading}
+              register={register}
+              errors={errors}
+              required
+            />
+            <hr />
+            <Input
+              id="description"
+              label="Description"
+              disabled={isLoading}
+              register={register}
+              errors={errors}
+              required
+            />
+          </div>
+        </div>
+      );
+      break;
+
+    case STEPS.PRICE:
+      bodyContent = (
+        <div className="modal__body__content">
+          <div className="modal__body__head">
+            <h1>Now, set your price</h1>
+            <h4>How much do you charge per night?</h4>
+          </div>
+          <Input
+            id="price"
+            label="Price"
+            formatPrice
+            type="number"
+            disabled={isLoading}
+            register={register}
+            errors={errors}
+            required
+          />
+        </div>
+      );
+      break;
+
     default:
       bodyContent = (
         <div className="modal__body__content">
@@ -186,7 +288,7 @@ const RentModal = () => {
       disabled={isLoading}
       isOpen={rentModal.isOpen}
       onClose={rentModal.onClose}
-      onSubmit={onNext}
+      onSubmit={handleSubmit(onSubmit)}
       title="Hestia your home!"
       actionLabel={actionLabel}
       secondaryActionLabel={secondaryActionLabel}
