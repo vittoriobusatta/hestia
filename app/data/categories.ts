@@ -94,4 +94,3 @@ export const categories = [
     description: "This property is brand new and luxurious!",
   },
 ];
-

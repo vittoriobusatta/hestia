@@ -3,7 +3,7 @@
 import useRentModal from "@/app/hooks/useRentModal";
 import Modal from "./Modal";
 import { useMemo, useState } from "react";
-import { categories } from "../navbar//Categories";
+import { categories } from "../../data/categories";
 import CategoryInput from "../inputs/CategoryInput";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import CitiesSelect from "../inputs/CitiesSelect";
