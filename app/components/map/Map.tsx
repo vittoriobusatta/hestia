@@ -1,7 +1,7 @@
 "use client";
 
 import L from "leaflet";
-import { MapContainer, Marker, TileLayer, GeoJSON } from "react-leaflet";
+import { MapContainer, Marker, TileLayer } from "react-leaflet";
 
 import "leaflet/dist/leaflet.css";
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
@@ -26,15 +26,17 @@ const attribution =
 
 const Map: React.FC<MapProps> = ({ center }) => {
   return (
-    <MapContainer
-      center={(center as L.LatLngExpression) || [-21.1151, 55.5364]}
-      zoom={center ? 10 : 9}
-      scrollWheelZoom={false}
-      className="map"
-    >
-      <TileLayer url={url} attribution={attribution} />
-      {center && <Marker position={center as L.LatLngExpression} />}
-    </MapContainer>
+    <div className="map__container">
+      <MapContainer
+        center={(center as L.LatLngExpression) || [-21.1151, 55.5364]}
+        zoom={center ? 10 : 9}
+        scrollWheelZoom={false}
+        className="map"
+      >
+        <TileLayer url={url} attribution={attribution} />
+        {center && <Marker position={center as L.LatLngExpression} />}
+      </MapContainer>
+    </div>
   );
 };
 
