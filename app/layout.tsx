@@ -9,7 +9,7 @@ import { Providers } from "./components/provider";
 import RentModal from "./components/modals/Rent";
 
 export const metadata = {
-  title: "Hestia",
+  title: "Hestia - Rent your dream house",
   description: "Airbnb Clone",
 };
 

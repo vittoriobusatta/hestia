@@ -22,7 +22,13 @@ const Button: React.FC<ButtonProps> = ({
   classname,
 }) => {
   return (
-    <button disabled={disabled} onClick={onClick} className={`button`}>
+    <button
+      disabled={disabled}
+      onClick={onClick}
+      className={`button 
+      ${classname ? classname : ""}
+    `}
+    >
       {Icon && (
         <div className="button__icon">
           <Icon size={20} />

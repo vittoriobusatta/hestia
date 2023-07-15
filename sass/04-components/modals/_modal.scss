@@ -242,6 +242,11 @@ form {
   z-index: 0 !important;
 }
 
+.map__container {
+  height: 35vh;
+  background-color: #f5f5f5;
+}
+
 .map {
   height: 35vh;
   border-radius: 8px;
@@ -279,5 +284,4 @@ form {
 .leaflet-bottom.leaflet-right {
   display: none;
 }
-
 
