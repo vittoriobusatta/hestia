@@ -268,15 +268,18 @@ const RentModal = () => {
             <h4>Pick a category</h4>
           </div>
           <div className="categories__list">
-            {categories.map((item) => (
-              <CategoryInput
-                key={item.label}
-                onClick={(category) => setCustomValue("category", category)}
-                selected={category === item.label}
-                label={item.label}
-                icon={item.icon}
-              />
-            ))}
+            {categories.map((item, index: any) => {
+              
+              return (
+                <CategoryInput
+                  key={index}
+                  onClick={(category) => setCustomValue("category", category)}
+                  selected={category === item.label}
+                  label={item.label}
+                  icon={item.icon}
+                />
+              );
+            })}
           </div>
         </div>
       );

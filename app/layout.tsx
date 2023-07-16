@@ -1,5 +1,4 @@
 import React from "react";
-import ClientOnly from "./ClientOnly";
 import LoginModal from "./components/modals/Login";
 import RegisterModal from "./components/modals/Register";
 import Navbar from "./components/navbar/Navbar";
@@ -24,12 +23,10 @@ export default async function RootLayout({
     <html lang="en">
       <body suppressHydrationWarning={true}>
         <Providers>
-          <ClientOnly>
-            <LoginModal />
-            <RegisterModal />
-            <RentModal />
-            <Navbar currentUser={currentUser} />
-          </ClientOnly>
+          <LoginModal />
+          <RegisterModal />
+          <RentModal />
+          <Navbar currentUser={currentUser} />
           <main>{children}</main>
         </Providers>
       </body>

@@ -1,28 +1,32 @@
 "use client";
 
-import { IconType } from "react-icons";
-
 interface CategoryBoxProps {
-  icon: IconType;
+  key: string;
+  icon: React.FC;
   label: string;
   selected?: boolean;
   onClick: (value: string) => void;
 }
 
-const CategoryBox: React.FC<CategoryBoxProps> = ({
+const CategoryInput: React.FC<CategoryBoxProps> = ({
+  key,
   icon: Icon,
   label,
   selected,
   onClick,
 }) => {
   return (
-    <div className={
-      `categories__item ${selected ? "categories__item--selected" : ""}`
-    } onClick={() => onClick(label)}>
-      <Icon size={30} />
+    <div
+    key={key}
+      className={`categories__item ${
+        selected ? "categories__item--selected" : ""
+      }`}
+      onClick={() => onClick(label)}
+    >
+      <Icon />
       <div className="categories__item__text">{label}</div>
     </div>
   );
 };
 
-export default CategoryBox;
+export default CategoryInput;
