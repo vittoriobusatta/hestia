@@ -1,5 +1,4 @@
 import React from "react";
-import ClientOnly from "./ClientOnly";
 import getCurrentUser from "./actions/getCurrentUser";
 import getListings, { IListingsParams } from "@/app/actions/getListings";
 import ListingCard from "./components/listings/ListingCard";
@@ -15,7 +14,6 @@ const Home = async ({ searchParams }: HomeProps) => {
   return (
     <section className="landing">
       <Categories />
-      <ClientOnly>
         {currentUser ? (
           <div className="home__message">
             <h1>
@@ -32,11 +30,10 @@ const Home = async ({ searchParams }: HomeProps) => {
             <ListingCard key={listing.id} listing={listing} />
           ))}
         </ul>
-      </ClientOnly>
     </section>
   );
 };
 
 export default Home;
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";

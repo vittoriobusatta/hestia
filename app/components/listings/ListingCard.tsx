@@ -1,15 +1,23 @@
+"use client";
+
 import Image from "next/image";
-import React from "react";
+import { useState } from "react";
 
 function ListingCard({ listing }: { listing: any }) {
+  const [loadingComplete, setLoadingComplete] = useState(false);
+
   return (
     <li>
       <picture>
         <Image
+          className={`picture__image ${
+            loadingComplete ? "picture__image--loading" : ""
+          }`}
           src={listing.imageSrc}
           alt={listing.title}
           height={400}
           width={400}
+          onLoadingComplete={() => setLoadingComplete(true)}
         />
       </picture>
       <div className="picture__content">
