@@ -14,6 +14,11 @@ const Avatar: React.FC<AvatarProps> = ({ src }) => {
       width="30" 
       alt="Avatar" 
       src={src || placeholder}
+      style={
+        {
+          borderRadius: "100%",
+        }
+      }
     />
    );
 }

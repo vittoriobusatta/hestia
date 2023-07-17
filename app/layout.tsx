@@ -3,9 +3,10 @@ import LoginModal from "./components/modals/Login";
 import RegisterModal from "./components/modals/Register";
 import Navbar from "./components/navbar/Navbar";
 import getCurrentUser from "./actions/getCurrentUser";
-import "../sass/styles.scss";
 import { Providers } from "./components/provider";
 import RentModal from "./components/modals/Rent";
+import ClientOnly from "./components/ClienOnly";
+import "../sass/styles.scss";
 
 export const metadata = {
   title: "Hestia - Rent your dream house",
@@ -23,10 +24,12 @@ export default async function RootLayout({
     <html lang="en">
       <body suppressHydrationWarning={true}>
         <Providers>
-          <LoginModal />
-          <RegisterModal />
-          <RentModal />
-          <Navbar currentUser={currentUser} />
+          {/* <ClientOnly> */}
+            <LoginModal />
+            <RegisterModal />
+            <RentModal />
+            <Navbar currentUser={currentUser} />
+          {/* </ClientOnly> */}
           <main>{children}</main>
         </Providers>
       </body>

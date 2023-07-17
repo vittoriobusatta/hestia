@@ -17,3 +17,13 @@ export type SafeReservation = Omit<
   endDate: string;
   listing: SafeListing;
 };
+
+export type CurrentUser = {
+  email: string | null;
+  emailVerified: string | null;
+  favoriteIds: string[];
+  hashedPassword: string | null;
+  id: string;
+  image: string | null;
+  name: string | null;
+};

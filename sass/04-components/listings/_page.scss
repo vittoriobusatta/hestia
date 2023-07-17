@@ -1,0 +1,61 @@
+.listing {
+  &__content {
+    padding: $gap $gap 0;
+    font-size: 14px;
+  }
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 18px;
+    &__right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      column-gap: 11px;
+    }
+    & h1 {
+      font-size: 20px;
+      font-weight: 500;
+      color: #222222;
+      font-family: $fontFamily;
+    }
+    & h2 {
+      font-size: 18px;
+      & span {
+        text-transform: capitalize;
+      }
+    }
+    & p {
+      font-size: 14px;
+      font-weight: 500;
+      font-family: $fontFamily;
+    }
+  }
+  &__gallery {
+    position: relative;
+    aspect-ratio: 16 / 11;
+    width: 100%;
+  }
+  &__image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    @media screen and (min-width: 768px) {
+      max-width: 600px;
+    }
+  }
+  &__body {
+    padding-top: 11px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 22px;
+    &__host {
+      display: inline-flex;
+      align-items: center;
+      column-gap: 11px;
+    }
+  }
+}

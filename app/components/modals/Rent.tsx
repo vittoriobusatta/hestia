@@ -108,7 +108,6 @@ const RentModal = () => {
     axios
       .post("/api/listings", data)
       .then(() => {
-        console.log("success");
         router.refresh();
         reset();
         setStep(STEPS.CATEGORY);

@@ -21,6 +21,19 @@
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
+        "coordinates": [-20.995096469570754, 55.326940254288616]
+      },
+      "properties": {
+        "code": "97411",
+        "name": "Bois-de-Nèfles",
+        "commune": "Saint-Paul",
+        "flag": "🇷🇪"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
         "coordinates": [-21.005907766425, 55.700687024779]
       },
       "properties": { "code": "97412", "name": "Bras-Panon", "flag": "🇷🇪" }
@@ -45,6 +58,31 @@
       "type": "Feature",
       "geometry": {
         "type": "Polygon",
+        "coordinates": [-20.88766027350117, 55.42618272315775]
+      },
+      "properties": {
+        "code": "97417",
+        "name": "La Montagne",
+        "commune": "Saint-Denis",
+        "flag": "🇷🇪"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-21.22451283607255, 55.55470281944608]
+      },
+      "properties": {
+        "code": "97418",
+        "name": "Plaine-des-Caffres",
+        "flag": "🇷🇪"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
         "coordinates": [-20.930897082781115, 55.334508178934044]
       },
       "properties": { "code": "97419", "name": "Possession", "flag": "🇷🇪" }
@@ -56,6 +94,19 @@
         "coordinates": [-20.957735641539, 55.277506140412]
       },
       "properties": { "code": "97420", "name": "Le Port", "flag": "🇷🇪" }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-21.04031758733882, 55.301795875697735]
+      },
+      "properties": {
+        "code": "97423",
+        "name": "Le Guillaume",
+        "commune": "Saint-Paul",
+        "flag": "🇷🇪"
+      }
     },
     {
       "type": "Feature",
@@ -228,6 +279,14 @@
         "coordinates": [-21.37473592669963, 55.616855389666824]
       },
       "properties": { "code": "97480", "name": "Saint-Joseph", "flag": "🇷🇪" }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [-20.902040341413098, 55.484220349743]
+      },
+      "properties": { "code": "97490", "name": "Sainte-Clotilde", "flag": "🇷🇪" }
     }
   ]
 }
