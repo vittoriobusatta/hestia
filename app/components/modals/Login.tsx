@@ -39,7 +39,6 @@ function Login() {
       setIsLoading(false);
 
       if (callback?.ok && !callback?.error) {
-        console.log("Logged in!");
         router.refresh();
         loginModal.onClose();
       }

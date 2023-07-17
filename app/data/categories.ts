@@ -22,10 +22,11 @@ export const categories = [
     description: "This property is close to the beach!",
   },
   {
-    label: "Windmills",
-    icon: Windmill,
-    description: "This property is has windmills!",
+    label: "Pools",
+    icon: Pool,
+    description: "This is property has a beautiful pool!",
   },
+
   {
     label: "Modern",
     icon: Modern,
@@ -37,19 +38,9 @@ export const categories = [
     description: "This property is in the countryside!",
   },
   {
-    label: "Pools",
-    icon: Pool,
-    description: "This is property has a beautiful pool!",
-  },
-  {
     label: "Lake",
     icon: Lake,
     description: "This property is near a lake!",
-  },
-  {
-    label: "Skiing",
-    icon: Skiing,
-    description: "This property has skiing activies!",
   },
   {
     label: "Castles",
@@ -75,5 +66,10 @@ export const categories = [
     label: "Lux",
     icon: Lux,
     description: "This property is brand new and luxurious!",
+  },
+  {
+    label: "Windmills",
+    icon: Windmill,
+    description: "This property is has windmills!",
   },
 ];

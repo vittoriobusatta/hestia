@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { SafeUser } from "../../../types/index";
@@ -32,6 +32,25 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
       return rentModal.onOpen();
     }
   }, [currentUser, rentModal]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isOpen &&
+        event.target instanceof Element &&
+        !event.target.closest(".user-connect")
+      ) {
+        setIsOpen(false);
+      }
+    };
+    
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [isOpen]);
 
   return (
     <div className="user">
