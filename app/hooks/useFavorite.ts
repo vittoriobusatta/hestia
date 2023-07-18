@@ -1,11 +1,8 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
-
 import { SafeUser } from "@/app/types";
-
 import useLoginModal from "./useLoginModal";
-import Router from "next/router";
 
 interface IUseFavorite {
   listingId: string;
@@ -29,18 +26,22 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
         return;
       }
 
+      const prevHasFavorited = hasFavorited;
+      setHasFavorited((prevHasFavorited) => !prevHasFavorited);
+
       try {
-        if (hasFavorited) {
-          setHasFavorited(false);
-          await axios.delete(`/api/favorites/${listingId}`);
+        let request;
+        if (prevHasFavorited) {
+          request = axios.delete(`/api/favorites/${listingId}`);
         } else {
-          setHasFavorited(true);
-          await axios.post(`/api/favorites/${listingId}`);
+          request = axios.post(`/api/favorites/${listingId}`);
         }
+
+        await request;
         router.refresh();
       } catch (error) {
         console.log(error);
-        setHasFavorited(!hasFavorited);
+        setHasFavorited(prevHasFavorited);
       }
     },
     [currentUser, hasFavorited, listingId, loginModal, router]
