@@ -2,6 +2,7 @@
 
 import useFavorite from "@/app/hooks/useFavorite";
 import { SafeUser } from "@/app/types";
+import { useMemo } from "react";
 
 interface HeartButtonProps {
   listingId: string;
@@ -12,11 +13,11 @@ const HeartButton: React.FC<HeartButtonProps> = ({
   listingId,
   currentUser,
 }) => {
-  const { hasFavorited, toggleFavorite } = useFavorite({
+  const { toggleFavorite, hasFavorited } = useFavorite({
     listingId,
     currentUser,
   });
-
+  
   return (
     <button className="picture__hearth__button" onClick={toggleFavorite}>
       <svg
