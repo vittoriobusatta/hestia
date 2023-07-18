@@ -1,9 +1,7 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useCallback, useMemo } from "react";
-
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { SafeUser } from "@/app/types";
-
 import useLoginModal from "./useLoginModal";
 
 interface IUseFavorite {
@@ -13,40 +11,46 @@ interface IUseFavorite {
 
 const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
   const router = useRouter();
-
   const loginModal = useLoginModal();
-
-  const hasFavorited = useMemo(() => {
+  const [hasFavorited, setHasFavorited] = useState(() => {
     const list = currentUser?.favoriteIds || [];
-
     return list.includes(listingId);
-  }, [currentUser, listingId]);
+  });
 
   const toggleFavorite = useCallback(
     async (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
 
       if (!currentUser) {
-        return loginModal.onOpen();
+        loginModal.onOpen();
+        return;
       }
+
+      const prevHasFavorited = hasFavorited;
+      setHasFavorited((prevHasFavorited) => !prevHasFavorited);
 
       try {
         let request;
-
-        if (hasFavorited) {
-          request = () => axios.delete(`/api/favorites/${listingId}`);
+        if (prevHasFavorited) {
+          request = axios.delete(`/api/favorites/${listingId}`);
         } else {
-          request = () => axios.post(`/api/favorites/${listingId}`);
+          request = axios.post(`/api/favorites/${listingId}`);
         }
 
-        await request();
+        await request;
         router.refresh();
       } catch (error) {
         console.log(error);
+        setHasFavorited(prevHasFavorited);
       }
     },
     [currentUser, hasFavorited, listingId, loginModal, router]
   );
+
+  useEffect(() => {
+    const list = currentUser?.favoriteIds || [];
+    setHasFavorited(list.includes(listingId));
+  }, [currentUser, listingId]);
 
   return {
     hasFavorited,
