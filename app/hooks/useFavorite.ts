@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { SafeUser } from "@/app/types";
 
 import useLoginModal from "./useLoginModal";
+import Router from "next/router";
 
 interface IUseFavorite {
   listingId: string;
@@ -12,6 +13,7 @@ interface IUseFavorite {
 }
 
 const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
+  const router = useRouter();
   const loginModal = useLoginModal();
   const [hasFavorited, setHasFavorited] = useState(() => {
     const list = currentUser?.favoriteIds || [];
@@ -35,12 +37,13 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
           setHasFavorited(true);
           await axios.post(`/api/favorites/${listingId}`);
         }
+        router.refresh();
       } catch (error) {
         console.log(error);
         setHasFavorited(!hasFavorited);
       }
     },
-    [currentUser, hasFavorited, listingId, loginModal]
+    [currentUser, hasFavorited, listingId, loginModal, router]
   );
 
   useEffect(() => {
