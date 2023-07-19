@@ -7,7 +7,9 @@ import { TbPhotoPlus } from "react-icons/tb";
 import { FiLoader } from "react-icons/fi";
 
 declare global {
-  var cloudinary: any;
+  var cloudinary: {
+    open: () => void;
+  };
 }
 
 const uploadPreset = "wz5varom";
