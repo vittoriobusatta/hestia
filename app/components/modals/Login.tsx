@@ -91,11 +91,13 @@ function Login() {
           label="Continue with Google"
           icon={FcGoogle}
           onClick={() => signIn("google")}
+          secondaryButton
         />
         <Button
           label="Continue with Github"
           icon={AiFillGithub}
           onClick={() => signIn("github")}
+          secondaryButton
         />
       </div>
       <p>

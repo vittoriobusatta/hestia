@@ -70,9 +70,9 @@ const Button: React.FC<ButtonProps> = ({
         </div>
       )}
       {primaryButton && (
-        <span className="modal__submit__background">
+        <span className="button__background">
           <span
-            className="modal__submit__background__hover"
+            className="button__background__hover"
             style={
               {
                 "--mouse-x": `${x}`,
