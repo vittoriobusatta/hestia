@@ -28,23 +28,23 @@ const Input: React.FC<InputProps> = ({
 }) => {
   const [pattern, setPattern] = useState<RegExp>(/./);
 
-  useEffect(() => {
-    switch (type) {
-      case "email":
-        if (strenghtLabel) {
-          setPattern(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$/);
-          break;
-        }
-      case "password":
-        if (strenghtLabel) {
-          setPattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^ws]).{8,}$/);
-          break;
-        }
-      default:
-        setPattern(/./);
-        break;
-    }
-  }, [type, strenghtLabel]);
+  // useEffect(() => {
+  //   switch (type) {
+  //     case "email":
+  //       if (strenghtLabel) {
+  //         setPattern(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$/);
+  //         break;
+  //       }
+  //     case "password":
+  //       if (strenghtLabel) {
+  //         setPattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^ws]).{8,}$/);
+  //         break;
+  //       }
+  //     default:
+  //       setPattern(/./);
+  //       break;
+  //   }
+  // }, [type, strenghtLabel]);
 
   return (
     <>
@@ -55,12 +55,12 @@ const Input: React.FC<InputProps> = ({
           disabled={disabled}
           {...register(id, {
             required,
-            pattern: {
-              value: pattern,
-              message: `Inserer un ${
-                type === "email" ? "email" : "mot de passe"
-              }.`,
-            },
+            // pattern: {
+            //   value: pattern,
+            //   message: `Inserer un ${
+            //     type === "email" ? "email" : "mot de passe"
+            //   }.`,
+            // },
           })}
           placeholder={label}
           type={type}
