@@ -12,6 +12,7 @@ const nextConfig = {
   experimental: {
     appDir: true,
     serverComponentsExternalPackages: ["@prisma/client", "bcrypt"],
+    scrollRestoration: true,
   },
   images: {
     domains: [
