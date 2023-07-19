@@ -70,7 +70,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
       .then(() => {
         console.log("Listing reserved!");
         setDateRange(initialDateRange);
-        // router.push('/trips');
+        router.push('/trips');
         router.refresh();
       })
       .catch((error) => {
@@ -101,10 +101,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
       <div className="listing__content">
         <ListingHead listing={listing} user={listing?.user} />
         <div
-          style={{
-            display: "inline-flex",
-            columnGap: "24px",
-          }}
+          className="listing__d"
         >
           <ListingInfo listing={listing} />
           <ListingReservation
