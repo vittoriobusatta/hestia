@@ -148,5 +148,20 @@
   column-gap: 22px;
   & button {
     flex: 1;
-   }
+  }
+}
+
+.category__box {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  &--selected {
+    color: #1e9de6;
+    & svg {
+      stroke: #1e9de6;
+    }
+  }
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import Select from "react-select";
-import citiesGeoJSON from "../../data/cities.json";
+import citiesGeoJSON from "../../../data/cities.json";
 import { memo } from "react";
 
 export type CountrySelectValue = {

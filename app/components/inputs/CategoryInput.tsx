@@ -1,7 +1,7 @@
 "use client";
 
 interface CategoryBoxProps {
-  key: string;
+  customKey: string;
   icon: React.FC;
   label: string;
   selected?: boolean;
@@ -9,15 +9,15 @@ interface CategoryBoxProps {
 }
 
 const CategoryInput: React.FC<CategoryBoxProps> = ({
-  key,
+  customKey,
   icon: Icon,
   label,
   selected,
   onClick,
 }) => {
   return (
-    <div
-    key={key}
+    <button
+      key={customKey}
       className={`categories__item ${
         selected ? "categories__item--selected" : ""
       }`}
@@ -25,7 +25,7 @@ const CategoryInput: React.FC<CategoryBoxProps> = ({
     >
       <Icon />
       <div className="categories__item__text">{label}</div>
-    </div>
+    </button>
   );
 };
 

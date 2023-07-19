@@ -1,14 +1,14 @@
 "use client";
 
-import axios from "axios";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
-
-import useLoginModal from "@/app/hooks/useLoginModal";
 import { SafeListing, SafeReservation, SafeUser } from "@/app/types";
-import { categories } from "@/app/data/categories";
-import Avatar from "@/app/components/Avatar";
-import Image from "next/image";
+import ListingHead from "@/app/components/listings/ListingHead";
+import ListingInfo from "@/app/components/listings/ListingInfo";
+import useLoginModal from "@/app/hooks/useLoginModal";
+import { useRouter } from "next/navigation";
+import { differenceInCalendarDays, eachDayOfInterval } from "date-fns";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import axios from "axios";
+import ListingReservation from "@/app/components/listings/ListingReservation";
 
 const initialDateRange = {
   startDate: new Date(),
@@ -32,42 +32,93 @@ const ListingClient: React.FC<ListingClientProps> = ({
   const loginModal = useLoginModal();
   const router = useRouter();
 
-  const category = useMemo(() => {
-    return categories.find((items) => items.label === listing.category);
-  }, [listing.category]);
+  const disabledDates = useMemo(() => {
+    let dates: Date[] = [];
+
+    reservations.forEach((reservation: any) => {
+      const range = eachDayOfInterval({
+        start: new Date(reservation.startDate),
+        end: new Date(reservation.endDate),
+      });
+
+      dates = [...dates, ...range];
+    });
+
+    return dates;
+  }, [reservations]);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(listing.price);
+  const [dateRange, setDateRange] = useState(initialDateRange);
+
+  const onCreateReservation = useCallback(() => {
+    if (!currentUser) {
+      return loginModal.onOpen();
+    }
+    setIsLoading(true);
+
+    const startDate = dateRange.startDate ?? new Date();
+    const endDate = dateRange.endDate ?? new Date();
+
+    axios
+      .post("/api/reservations", {
+        totalPrice,
+        startDate,
+        endDate,
+        listingId: listing?.id,
+      })
+      .then(() => {
+        console.log("Listing reserved!");
+        setDateRange(initialDateRange);
+        // router.push('/trips');
+        router.refresh();
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [totalPrice, dateRange, listing?.id, router, currentUser, loginModal]);
+
+  useEffect(() => {
+    if (dateRange.startDate && dateRange.endDate) {
+      const dayCount = differenceInCalendarDays(
+        dateRange.endDate,
+        dateRange.startDate
+      );
+
+      if (dayCount && listing.price) {
+        setTotalPrice(dayCount * listing.price);
+      } else {
+        setTotalPrice(listing.price);
+      }
+    }
+  }, [dateRange, listing.price]);
 
   return (
     <section className="listing__page">
-      <Image
-        className="listing__image"
-        src={listing?.imageSrc}
-        alt={listing?.title}
-        height={400}
-        width={400}
-      />
       <div className="listing__content">
-        <div className="listing__head">
-          <div className="listing__head__left">
-            <h1>{listing?.title}</h1>
-            <p>{listing?.locationValue}</p>
-          </div>
-          <div className="listing__head__right">
-            <h2>Hosted by <span>{listing?.user.name?.split(" ")[0]}</span></h2>
-            <Avatar src={listing?.user.image} />
-          </div>
+        <ListingHead listing={listing} user={listing?.user} />
+        <div
+          style={{
+            display: "inline-flex",
+            columnGap: "24px",
+          }}
+        >
+          <ListingInfo listing={listing} />
+          <ListingReservation
+            price={listing.price}
+            totalPrice={totalPrice}
+            onChangeDate={
+              (value: any) => setDateRange(value)
+            }
+            dateRange={dateRange}
+            onSubmit={onCreateReservation}
+            disabled={isLoading}
+            disabledDates={disabledDates}
+          />
         </div>
-        <hr />
-        <div className="listing__body">
-          <p>
-            {listing?.roomCount} {listing?.roomCount > 1 ? "rooms" : "room"} {"-"}
-            {""} {listing?.bathroomCount}
-            {""} {listing?.bathroomCount > 1 ? "bathrooms" : "bathroom"} {"-"}
-            {""} {listing?.guestCount}{" "}
-            {listing?.guestCount > 1 ? "guests" : "guest"}
-          </p>
-          <p>{listing?.price} € / night</p>
-        </div>
-        <p>{listing?.description}</p>
       </div>
     </section>
   );

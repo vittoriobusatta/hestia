@@ -7,7 +7,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import Button from "../inputs/Button";
+import Button from "../inputs/forms/Button";
 
 interface ModalProps {
   isOpen?: boolean;
@@ -36,8 +36,6 @@ const Modal: React.FC<ModalProps> = ({
 }) => {
   const [showModal, setShowModal] = useState(isOpen);
   const submitRef = useRef<HTMLButtonElement>(null);
-  const [x, setX] = useState(0);
-  const [y, setY] = useState(0);
 
   useEffect(() => {
     setShowModal(isOpen);
@@ -47,38 +45,6 @@ const Modal: React.FC<ModalProps> = ({
     setShowModal(false);
     onClose();
   }, [onClose]);
-
-  function showCoords(event: MouseEvent) {
-    const submitButton = submitRef.current;
-    if (submitButton) {
-      const rect = submitButton.getBoundingClientRect();
-      const clientWidth = submitButton.clientWidth || 0;
-      const clientHeight = submitButton.clientHeight || 0;
-
-      setX((prevX) => {
-        const newX = ((event.clientX - rect.left) / clientWidth) * 100;
-        const roundedX = parseFloat(newX.toFixed(2));
-        return roundedX !== prevX ? roundedX : prevX;
-      });
-
-      setY((prevY) => {
-        const newY = ((event.clientY - rect.top) / clientHeight) * 100;
-        const roundedY = parseFloat(newY.toFixed(2));
-        return roundedY !== prevY ? roundedY : prevY;
-      });
-    }
-  }
-
-  useEffect(() => {
-    const submitButton = submitRef.current;
-    if (showModal) {
-      submitButton?.focus();
-      submitButton?.addEventListener("mousemove", showCoords);
-      return () => {
-        submitButton?.removeEventListener("mousemove", showCoords);
-      };
-    }
-  }, [showModal]);
 
   useEffect(() => {
     const submitButton = submitRef.current;
@@ -160,33 +126,15 @@ const Modal: React.FC<ModalProps> = ({
                     disabled={disabled}
                     label={secondaryActionLabel}
                     onClick={handleSecondaryAction}
-                    outline
+                    secondaryButton
                   />
                 )}
-                <button
-                  className="modal__submit"
+                <Button
+                  disabled={disabled}
+                  label={actionLabel}
                   onClick={handleSubmit}
-                  ref={submitRef}
-                >
-                  <span className="modal__submit__background">
-                    <span
-                      className="modal__submit__background__hover"
-                      style={
-                        {
-                          "--mouse-x": `${x}`,
-                          "--mouse-y": `${y}`,
-                        } as React.CSSProperties
-                      }
-                    />
-                  </span>
-                  <span
-                    className="
-                modal__submit__text
-                "
-                  >
-                    {actionLabel}
-                  </span>
-                </button>
+                  primaryButton
+                />
               </div>
               {footer}
             </div>
