@@ -88,13 +88,11 @@ function Login() {
       </div>
       <div className="modal__footer__buttons">
         <Button
-          outline
           label="Continue with Google"
           icon={FcGoogle}
           onClick={() => signIn("google")}
         />
         <Button
-          outline
           label="Continue with Github"
           icon={AiFillGithub}
           onClick={() => signIn("github")}
