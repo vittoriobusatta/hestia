@@ -11,10 +11,19 @@ export interface IListingsParams {
   category?: string;
 }
 
-export default async function getListings() {
+export default async function getListings(params: IListingsParams) {
   try {
+    const { category } = params;
+
+    let query: any = {};
+
+    if (category) {
+      query.category = category;
+    }
+
     const users = await prisma.user.findMany();
     const listings = await prisma.listing.findMany({
+      where: query,
       orderBy: {
         createdAt: "desc",
       },

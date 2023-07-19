@@ -11,7 +11,7 @@ interface HomeProps {
 
 const Home = async ({ searchParams }: HomeProps) => {
   const currentUser = await getCurrentUser();
-  const listings = await getListings();
+  const listings = await getListings(searchParams);
 
   return (
     <section className="landing">

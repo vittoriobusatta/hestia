@@ -6,11 +6,11 @@ import { useMemo, useState } from "react";
 import { categories } from "../../data/categories";
 import CategoryInput from "../inputs/CategoryInput";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import CitiesSelect from "../inputs/CitiesSelect";
+import CitiesSelect from "../inputs/modals/CitiesSelect";
 import dynamic from "next/dynamic";
-import Counter from "../inputs/Counter";
-import ImageUpload from "../inputs/ImageUpload";
-import Input from "../inputs/Input";
+import Counter from "../inputs/modals/Counter";
+import ImageUpload from "../inputs/modals/ImageUpload";
+import Input from "../inputs/forms/Input";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
@@ -267,11 +267,11 @@ const RentModal = () => {
             <h4>Pick a category</h4>
           </div>
           <div className="categories__list">
-            {categories.map((item, index: any) => {
-              
+            {categories.map((item: any) => {
               return (
                 <CategoryInput
-                  key={index}
+                  key={item.id}
+                  customKey={item.id}
                   onClick={(category) => setCustomValue("category", category)}
                   selected={category === item.label}
                   label={item.label}

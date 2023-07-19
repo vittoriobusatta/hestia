@@ -47,10 +47,13 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
   }, [label, router, params]);
 
   return (
-    <div onClick={handleClick} className="category__box">
+    <button
+      onClick={handleClick}
+      className={`category__box ${selected ? "category__box--selected" : ""}`}
+    >
       <Icon size={26} />
       <div>{label}</div>
-    </div>
+    </button>
   );
 };
 

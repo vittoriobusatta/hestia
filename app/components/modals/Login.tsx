@@ -4,11 +4,11 @@ import React, { useCallback, useState } from "react";
 import Modal from "./Modal";
 import useLoginModal from "../../hooks/useLoginModal";
 import useRegisterModal from "../../hooks/useRegisterModal";
-import Input from "../inputs/Input";
+import Input from "../inputs/forms/Input";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import Button from "../inputs/Button";
+import Button from "../inputs/forms/Button";
 import { FcGoogle } from "react-icons/fc";
 import { AiFillGithub } from "react-icons/ai";
 

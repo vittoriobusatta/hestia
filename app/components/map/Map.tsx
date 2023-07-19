@@ -18,18 +18,19 @@ L.Icon.Default.mergeOptions({
 
 interface MapProps {
   center?: number[];
+  strongZoom?: boolean;
 }
 
 const url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 const attribution =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
-const Map: React.FC<MapProps> = ({ center }) => {
+const Map: React.FC<MapProps> = ({ center, strongZoom }) => {
   return (
     <div className="map__container">
       <MapContainer
         center={(center as L.LatLngExpression) || [-21.1151, 55.5364]}
-        zoom={center ? 10 : 9}
+        zoom={strongZoom ? 14 : center ? 10 : 9}
         scrollWheelZoom={false}
         className="map"
       >
