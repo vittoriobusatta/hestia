@@ -2,7 +2,6 @@
 
 import useFavorite from "@/app/hooks/useFavorite";
 import { SafeUser } from "@/app/types";
-import { useMemo } from "react";
 
 interface HeartButtonProps {
   listingId: string;
