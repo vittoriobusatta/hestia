@@ -11,6 +11,8 @@ import "../sass/styles.scss";
 export const metadata = {
   title: "Hestia - Rent your dream house",
   description: "Airbnb Clone",
+  charset: "utf-8",
+  viewport: "width=device-width, initial-scale=1",
 };
 
 export default async function RootLayout({
@@ -25,10 +27,10 @@ export default async function RootLayout({
       <body suppressHydrationWarning={true}>
         <Providers>
           {/* <ClientOnly> */}
-            <LoginModal />
-            <RegisterModal />
-            <RentModal />
-            <Navbar currentUser={currentUser} />
+          <LoginModal />
+          <RegisterModal />
+          <RentModal />
+          <Navbar currentUser={currentUser} />
           {/* </ClientOnly> */}
           <main>{children}</main>
         </Providers>
