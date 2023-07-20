@@ -3,15 +3,16 @@
 import axios from "axios";
 import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
-import { SafeReservation, SafeUser } from "@/app/types";
-import ListingCard from "../components/listings/ListingCard";
 
-interface TripsClientProps {
+import { SafeReservation, SafeUser } from "@/app/types";
+import ListingCard from "@/app/components/listings/ListingCard";
+
+interface ReservationsClientProps {
   reservations: SafeReservation[];
   currentUser?: SafeUser | null;
 }
 
-const TripsClient: React.FC<TripsClientProps> = ({
+const ReservationsClient: React.FC<ReservationsClientProps> = ({
   reservations,
   currentUser,
 }) => {
@@ -29,7 +30,7 @@ const TripsClient: React.FC<TripsClientProps> = ({
           router.refresh();
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         })
         .finally(() => {
           setDeletingId("");
@@ -39,21 +40,23 @@ const TripsClient: React.FC<TripsClientProps> = ({
   );
 
   return (
-    <div className="landing__listing">
-      {reservations.map((reservation: any) => (
-        <ListingCard
-          key={reservation.id}
-          listing={reservation.listing}
-          reservation={reservation}
-          actionId={reservation.id}
-          onAction={onCancel}
-          disabled={deletingId === reservation.id}
-          actionLabel="Cancel reservation"
-          currentUser={currentUser}
-        />
-      ))}
-    </div>
+    <>
+      <div className="landing__listing">
+        {reservations.map((reservation: any) => (
+          <ListingCard
+            key={reservation.id}
+            listing={reservation.listing}
+            reservation={reservation}
+            actionId={reservation.id}
+            onAction={onCancel}
+            disabled={deletingId === reservation.id}
+            actionLabel="Cancel guest reservation"
+            currentUser={currentUser}
+          />
+        ))}
+      </div>
+    </>
   );
 };
 
-export default TripsClient;
+export default ReservationsClient;

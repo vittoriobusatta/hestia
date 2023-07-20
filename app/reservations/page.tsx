@@ -1,37 +1,40 @@
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import getReservations from "@/app/actions/getReservations";
 
-import TripsClient from "./TripsClient";
+import TripsClient from "./ReservationsClient";
 
-const TripsPage = async () => {
+const ReservationsPage = async () => {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
     return (
       <>
-        <div>Loading...</div>
+        <div>
+          <h1>Unauthorized</h1>
+          <p>Please login</p>
+        </div>
       </>
     );
   }
 
-  const reservations = await getReservations({ userId: currentUser.id });
+  const reservations = await getReservations({ authorId: currentUser.id });
 
   if (reservations.length === 0) {
     return (
-      <section className="landing">
+      <>
         <div>
-          <h2>You have no trips</h2>
-          <p>Once you book a place, your trips will appear here.</p>
+          <h1>Reservations</h1>
+          <p>No reservations found</p>
         </div>
-      </section>
+      </>
     );
   }
 
   return (
-    <section className="landing">
+    <div className="landing">
       <TripsClient reservations={reservations} currentUser={currentUser} />
-    </section>
+    </div>
   );
 };
 
-export default TripsPage;
+export default ReservationsPage;
