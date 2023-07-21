@@ -4,6 +4,7 @@ import getListings, { IListingsParams } from "@/app/actions/getListings";
 import ListingCard from "./components/listings/ListingCard";
 import Categories from "./components/navbar/Categories";
 import "../sass/styles.scss";
+import StripeProvider from "./components/checkout/StripeProvider";
 
 interface HomeProps {
   searchParams: IListingsParams;
@@ -27,6 +28,7 @@ const Home = async ({ searchParams }: HomeProps) => {
           );
         })}
       </ul>
+      {/* <StripeProvider /> */}
     </section>
   );
 };
