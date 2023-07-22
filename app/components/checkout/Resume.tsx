@@ -23,8 +23,6 @@ function Resume({ item }: ResumeProps) {
 
   const nights = Math.round((end.getTime() - start.getTime()) / 86400000);
 
-  console.log(checkoutListing);
-
   return (
     <div className="checkout__content__item">
       <div className="checkout__content__item__price">

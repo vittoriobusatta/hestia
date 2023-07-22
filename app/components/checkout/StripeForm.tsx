@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import {
   PaymentElement,
@@ -53,11 +54,14 @@ const CheckoutForm = () => {
 
     setIsLoading(true);
 
+    console.log(process.env.NEXT_PUBLIC_BASE_URL);
+    
+
     try {
       const { error } = await stripe.confirmPayment({
         elements,
         confirmParams: {
-          return_url: "http://localhost:3000/success",
+          return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success`,
         },
       });
 
