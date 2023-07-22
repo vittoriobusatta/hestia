@@ -29,7 +29,7 @@
     "**/*.tsx",
     "**/**/*.ts",
     ".next/types/**/*.ts"
-  ],
+, "pages/api/hello.js"  ],
   "exclude": ["node_modules", "**/*.spec.ts"],
   "files": ["graphql.d.ts"]
 }
