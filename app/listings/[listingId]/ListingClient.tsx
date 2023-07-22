@@ -5,10 +5,11 @@ import ListingHead from "@/app/components/listings/ListingHead";
 import ListingInfo from "@/app/components/listings/ListingInfo";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import { useRouter } from "next/navigation";
-import { differenceInCalendarDays, eachDayOfInterval } from "date-fns";
+import { differenceInCalendarDays, eachDayOfInterval, format } from "date-fns";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import ListingReservation from "@/app/components/listings/ListingReservation";
+import { getFormattedDate } from "@/utils/helpers";
 
 const initialDateRange = {
   startDate: new Date(),
@@ -60,26 +61,17 @@ const ListingClient: React.FC<ListingClientProps> = ({
     const startDate = dateRange.startDate ?? new Date();
     const endDate = dateRange.endDate ?? new Date();
 
-    axios
-      .post("/api/reservations", {
-        totalPrice,
-        startDate,
-        endDate,
-        listingId: listing?.id,
-      })
-      .then(() => {
-        console.log("Listing reserved!");
-        setDateRange(initialDateRange);
-        router.push('/trips');
-        router.refresh();
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [totalPrice, dateRange, listing?.id, router, currentUser, loginModal]);
+    console.log("startDate", startDate);
+
+    const startDateString = getFormattedDate(startDate);
+    const endDateString = getFormattedDate(endDate);
+
+    router.push(
+      `/checkout?&startDate=${startDateString}&endDate=${endDateString}&listingId=${listing.id}`
+    );
+
+    setIsLoading(false);
+  }, [currentUser, dateRange, listing, loginModal, router]);
 
   useEffect(() => {
     if (dateRange.startDate && dateRange.endDate) {
@@ -100,16 +92,12 @@ const ListingClient: React.FC<ListingClientProps> = ({
     <section className="listing__page">
       <div className="listing__content">
         <ListingHead listing={listing} user={listing?.user} />
-        <div
-          className="listing__d"
-        >
+        <div className="listing__d">
           <ListingInfo listing={listing} />
           <ListingReservation
             price={listing.price}
             totalPrice={totalPrice}
-            onChangeDate={
-              (value: any) => setDateRange(value)
-            }
+            onChangeDate={(value: any) => setDateRange(value)}
             dateRange={dateRange}
             onSubmit={onCreateReservation}
             disabled={isLoading}

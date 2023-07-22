@@ -79,7 +79,6 @@ const CheckoutForm = () => {
       onSubmit={handleSubmit}
       style={{
         maxWidth: "400px",
-        margin: "0 auto",
         padding: "20px",
         border: "1px solid #ccc",
         borderRadius: "4px",

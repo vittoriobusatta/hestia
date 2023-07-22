@@ -7,6 +7,7 @@ export async function POST(request: Request) {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
+    console.log("No user found");
     return NextResponse.error();
   }
 
@@ -14,6 +15,7 @@ export async function POST(request: Request) {
   const { listingId, startDate, endDate, totalPrice } = body;
 
   if (!listingId || !startDate || !endDate || !totalPrice) {
+    console.log("Missing parameters");
     return NextResponse.error();
   }
 
@@ -33,5 +35,7 @@ export async function POST(request: Request) {
     },
   });
 
-  return NextResponse.json(listingAndReservation);
+  return NextResponse.json(listingAndReservation, {
+    status: 200,
+  });
 }

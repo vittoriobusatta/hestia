@@ -10,15 +10,34 @@ const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
 );
 
-export default function StripeProvider() {
+interface ResumeProps {
+  item: {
+    startDate: string;
+    endDate: string;
+    checkoutListing: any;
+    totalPrice: number;
+  };
+}
+
+export default function StripeCheckout({ item }: ResumeProps) {
   const [clientSecret, setClientSecret] = useState("");
+
+  const { startDate, endDate, checkoutListing, totalPrice } = item;
 
   useEffect(() => {
     const getClientSecret = async () => {
       await axios
         .post("api/checkout/stripe_intent", {
           headers: { "Content-Type": "application/json" },
-          items: [{ id: "xl-tshirt" }],
+          items: [
+            {
+              price: checkoutListing.price,
+              startDate: startDate,
+              endDate: endDate,
+              totalPrice: totalPrice,
+              listingId: checkoutListing.id,
+            },
+          ],
         })
         .then((res) => {
           setClientSecret(res.data.clientSecret);
@@ -36,12 +55,12 @@ export default function StripeProvider() {
   };
 
   return (
-    <div className="landing">
+    <>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm />
         </Elements>
       )}
-    </div>
+    </>
   );
 }
