@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Elements } from "@stripe/react-stripe-js";
+import { Elements, useStripe } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./StripeForm";
 import axios from "axios";
+import Stripe from "stripe";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
@@ -44,23 +45,36 @@ export default function StripeCheckout({ item }: ResumeProps) {
         });
     };
     getClientSecret();
-  }, []);
+  }, [
+    checkoutListing.id,
+    checkoutListing.price,
+    endDate,
+    startDate,
+    totalPrice,
+  ]);
 
   const appearance = {
-    theme: "stripe",
+    theme: "stripe" as "stripe",
   };
+
   const options = {
     clientSecret,
     appearance,
+    layout: {
+      type: "accordion",
+      defaultCollapsed: false,
+      radios: true,
+      spacedAccordionItems: false,
+    },
   };
 
   return (
-    <>
+    <div className="checkout__form">
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm />
         </Elements>
       )}
-    </>
+    </div>
   );
 }

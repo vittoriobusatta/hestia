@@ -3,6 +3,7 @@ import {
   PaymentElement,
   useStripe,
   useElements,
+  PaymentRequestButtonElement,
 } from "@stripe/react-stripe-js";
 import Button from "../inputs/forms/Button";
 
@@ -10,7 +11,6 @@ const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
 
-  const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -43,7 +43,7 @@ const CheckoutForm = () => {
           break;
       }
     });
-  }, [stripe]);
+  }, [stripe, elements]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -54,16 +54,21 @@ const CheckoutForm = () => {
 
     setIsLoading(true);
 
-    const { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: "http://localhost:3000/success",
-      },
-    });
+    try {
+      const { error } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: "http://localhost:3000/success",
+        },
+      });
 
-    if (error.type === "card_error" || error.type === "validation_error") {
-      setMessage(error.message);
-    } else {
+      if (error.type === "card_error" || error.type === "validation_error") {
+        setMessage(error.message);
+      } else {
+        setMessage("An unexpected error occurred.");
+      }
+    } catch (error) {
+      console.log("Error creating payment element", error);
       setMessage("An unexpected error occurred.");
     }
 
@@ -72,6 +77,7 @@ const CheckoutForm = () => {
 
   const paymentElementOptions = {
     layout: "tabs",
+    paymentMethodTypes: ["card", "klarna", "apple_pay", "google_pay"],
   };
 
   return (

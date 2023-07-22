@@ -6,11 +6,12 @@ export async function getSession() {
   return await getServerSession(authOptions);
 }
 
-export default async function getCurrentUser() {
+export default async function getCurrentUser(): Promise<any> {
   try {
     const session = await getSession();
 
     if (!session?.user?.email) {
+      console.log("No session found");
       return null;
     }
 
@@ -21,6 +22,7 @@ export default async function getCurrentUser() {
     });
 
     if (!currentUser) {
+      console.log("No user found");
       return null;
     }
 
@@ -29,6 +31,7 @@ export default async function getCurrentUser() {
       emailVerified: currentUser.emailVerified?.toISOString() || null,
     };
   } catch (error: any) {
+    console.log("Error getting current user", error);
     return null;
   }
 }

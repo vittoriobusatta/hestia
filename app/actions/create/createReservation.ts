@@ -1,18 +1,20 @@
 import { NextResponse } from "next/server";
-
 import prisma from "@/app/libs/prisma";
-import getCurrentUser from "@/app/actions/getCurrentUser";
 
-export async function POST(request: Request) {
-  const currentUser = await getCurrentUser();
+type Reservation = {
+  startDate: Date;
+  endDate: Date;
+  totalPrice: number;
+  listingId: string;
+  userId: string;
+};
+export const createReservation = async (reservation: Reservation) => {
+  const { startDate, endDate, totalPrice, listingId, userId } = reservation;
 
-  if (!currentUser) {
+  if (!userId) {
     console.log("No user found");
     return NextResponse.error();
   }
-
-  const body = await request.json();
-  const { listingId, startDate, endDate, totalPrice } = body;
 
   if (!listingId || !startDate || !endDate || !totalPrice) {
     console.log("Missing parameters");
@@ -26,10 +28,10 @@ export async function POST(request: Request) {
     data: {
       reservations: {
         create: {
-          userId: currentUser.id,
-          startDate,
-          endDate,
-          totalPrice,
+          userId: userId,
+          totalPrice: totalPrice,
+          startDate: startDate,
+          endDate: endDate,
         },
       },
     },
@@ -38,4 +40,4 @@ export async function POST(request: Request) {
   return NextResponse.json(listingAndReservation, {
     status: 200,
   });
-}
+};

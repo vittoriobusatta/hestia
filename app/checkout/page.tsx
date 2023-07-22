@@ -5,6 +5,7 @@ interface Params {
   listingId: string;
   startDate: string;
   endDate: string;
+  numberOfGuests: string;
 }
 
 const Checkout = async ({ searchParams }: { searchParams: Params }) => {

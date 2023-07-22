@@ -1,9 +1,11 @@
+import getCurrentUser from "@/app/actions/getCurrentUser";
 import { parseFormattedDate } from "@/utils/helpers";
 import { NextResponse } from "next/server";
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export async function POST(request: Request) {
   const { items } = await request.json();
+  const currentUser = await getCurrentUser();
 
   if (!items) return new NextResponse("Missing items", { status: 400 });
 
@@ -39,6 +41,7 @@ export async function POST(request: Request) {
       startDate: items[0].startDate, // Ajoutez la date de début comme métadonnée
       endDate: items[0].endDate, // Ajoutez la date de fin comme métadonnée
       listingId: items[0].listingId, // Ajoutez l'identifiant de l'annonce comme métadonnée
+      userId: currentUser.id, // Ajoutez l'identifiant de l'utilisateur comme métadonnée
     },
   });
 

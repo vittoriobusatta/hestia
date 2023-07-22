@@ -67,7 +67,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
     const endDateString = getFormattedDate(endDate);
 
     router.push(
-      `/checkout?&startDate=${startDateString}&endDate=${endDateString}&listingId=${listing.id}`
+      `/checkout?&startDate=${startDateString}&endDate=${endDateString}&listingId=${listing.id}&numberOfGuests=1`
     );
 
     setIsLoading(false);

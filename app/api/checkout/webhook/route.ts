@@ -1,5 +1,7 @@
-import { getFormattedDate, parseFormattedDate } from "@/utils/helpers";
-import axios from "axios";
+import { parseFormattedDate } from "@/utils/helpers";
+import { NextResponse } from "next/server";
+import prisma from "@/app/libs/prisma";
+import { createReservation } from "@/app/actions/create/createReservation";
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -20,40 +22,21 @@ export async function POST(req: Request) {
     case "payment_intent.succeeded":
       const paymentIntentSucceeded = event.data.object;
 
-      const startDate = parseFormattedDate(
-        paymentIntentSucceeded.metadata.startDate
-      );
-      const endDate = parseFormattedDate(
-        paymentIntentSucceeded.metadata.endDate
-      );
+      const reservation = {
+        startDate: parseFormattedDate(
+          paymentIntentSucceeded.metadata.startDate
+        ),
+        endDate: parseFormattedDate(paymentIntentSucceeded.metadata.endDate),
+        totalPrice: paymentIntentSucceeded.amount / 100,
+        listingId: paymentIntentSucceeded.metadata.listingId,
+        userId: paymentIntentSucceeded.metadata.userId,
+      };
 
-      try {
-        const response = await axios.post(
-          "http://localhost:3000/api/reservations",
-          {
-            listingId: paymentIntentSucceeded.metadata.listingId,
-            startDate: startDate,
-            endDate: endDate,
-            totalPrice: paymentIntentSucceeded.amount / 100,
-          }
-        );
+      await createReservation(reservation);
 
-        if (response.status !== 200) {
-          console.error("Error creating reservation");
-        }
-
-        const data = await response.data;
-        console.log("Reservation created:", data);
-      } catch (error) {
-        console.error("Error creating reservation:", error);
-      }
-
-      break;
     default:
       console.log(`Unhandled event type ${event.type}`);
   }
 
   return new Response("Success");
 }
-
-// 4242 4242 4242 4242
