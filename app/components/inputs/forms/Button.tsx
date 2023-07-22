@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 interface ButtonProps {
   label: string;
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   small?: boolean;
   icon?: React.FC<{ size: number }>;

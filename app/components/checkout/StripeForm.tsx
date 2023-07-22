@@ -3,7 +3,6 @@ import {
   PaymentElement,
   useStripe,
   useElements,
-  PaymentRequestButtonElement,
 } from "@stripe/react-stripe-js";
 import Button from "../inputs/forms/Button";
 
@@ -62,10 +61,18 @@ const CheckoutForm = () => {
         },
       });
 
-      if (error.type === "card_error" || error.type === "validation_error") {
-        setMessage(error.message);
+      if (error) {
+        // Handle specific error types or use a default error message
+        if (error.type === "card_error" || error.type === "validation_error") {
+          setMessage(
+            error.message ?? "An unexpected error occurred. Please try again."
+          );
+        } else {
+          setMessage("An unexpected error occurred.");
+        }
       } else {
-        setMessage("An unexpected error occurred.");
+        // Payment success scenario
+        setMessage("Payment succeeded!");
       }
     } catch (error) {
       console.log("Error creating payment element", error);
@@ -76,7 +83,7 @@ const CheckoutForm = () => {
   };
 
   const paymentElementOptions = {
-    layout: "tabs",
+    layout: "tabs" as "tabs",
     paymentMethodTypes: ["card", "klarna", "apple_pay", "google_pay"],
   };
 
@@ -94,12 +101,7 @@ const CheckoutForm = () => {
       }}
     >
       <PaymentElement id="payment-element" options={paymentElementOptions} />
-      <Button
-        type="submit"
-        disabled={!stripe || !elements}
-        label="Pay"
-        primaryButton
-      />
+      <Button disabled={!stripe || !elements} label="Pay" primaryButton />
       {message && <div id="payment-message">{message}</div>}
     </form>
   );
