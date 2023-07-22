@@ -9,13 +9,23 @@ interface Params {
 }
 
 const Checkout = async ({ searchParams }: { searchParams: Params }) => {
-  const listing = await getListingById(searchParams);
+  if (!searchParams.listingId) {
+    return <div>Loading...</div>;
+  }
 
-  return (
-    <div className="landing">
-      <CheckoutClient params={searchParams} checkoutListing={listing} />
-    </div>
-  );
+  try {
+    const listing = await getListingById(searchParams);
+
+    return (
+      <div className="landing">
+        <CheckoutClient params={searchParams} checkoutListing={listing} />
+      </div>
+    );
+  } catch (error) {
+    console.log("Error fetching listing:", error);
+
+    return <div>Error fetching listing.</div>;
+  }
 };
 
 export default Checkout;
