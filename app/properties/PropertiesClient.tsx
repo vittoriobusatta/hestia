@@ -26,11 +26,11 @@ const PropertiesClient: React.FC<PropertiesClientProps> = ({
       axios
         .delete(`/api/listings/${id}`)
         .then(() => {
-          console.log("Property deleted");
           router.refresh();
         })
         .catch((error) => {
           console.error(error);
+          alert("An error occured while trying to delete the listing.");
         })
         .finally(() => {
           setDeletingId("");

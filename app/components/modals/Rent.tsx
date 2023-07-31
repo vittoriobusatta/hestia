@@ -113,8 +113,9 @@ const RentModal = () => {
         setStep(STEPS.CATEGORY);
         rentModal.onClose();
       })
-      .catch(() => {
-        alert("An error occured");
+      .catch((error) => {
+        console.error(error);
+        alert("An error occured while trying to create your listing.");
       })
       .finally(() => {
         setIsLoading(false);

@@ -38,7 +38,8 @@ function Register() {
         loginModal.onOpen();
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
+        alert("An error occured while trying to register, please try again.");
       })
       .finally(() => {
         setIsLoading(false);

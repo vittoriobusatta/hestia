@@ -4,7 +4,7 @@ import Select from "react-select";
 import citiesGeoJSON from "../../../data/cities.json";
 import { memo } from "react";
 
-export type CountrySelectValue = {
+export type CitiesSelectValue = {
   flag: string;
   label: string;
   latlng: number[];
@@ -13,8 +13,8 @@ export type CountrySelectValue = {
 };
 
 interface CountrySelectProps {
-  value?: CountrySelectValue;
-  onChange: (value: CountrySelectValue) => void;
+  value?: CitiesSelectValue;
+  onChange: (value: CitiesSelectValue) => void;
 }
 
 const cities = citiesGeoJSON.features.map((feature) => ({
@@ -35,7 +35,7 @@ const CitiesSelect: React.FC<CountrySelectProps> = memo(
           isClearable
           options={cities}
           value={value}
-          onChange={(value) => onChange(value as CountrySelectValue)}
+          onChange={(value) => onChange(value as CitiesSelectValue)}
           formatOptionLabel={(option: any) => (
             <div className="select__content">
               <span className="select__content__flag">{option.flag}</span>
@@ -50,8 +50,8 @@ const CitiesSelect: React.FC<CountrySelectProps> = memo(
             borderRadius: 6,
             colors: {
               ...theme.colors,
-              primary: "#049dea",
-              primary25: "#e4efff",
+              primary: "#2a9d8f",
+              primary25: "#2a9d8f54",
             },
           })}
         />

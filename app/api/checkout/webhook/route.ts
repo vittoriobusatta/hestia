@@ -34,8 +34,8 @@ export async function POST(req: Request) {
 
       await createReservation(reservation);
 
+      break;
     default:
-      console.log(`Unhandled event type ${event.type}`);
   }
 
   return new Response("Success");

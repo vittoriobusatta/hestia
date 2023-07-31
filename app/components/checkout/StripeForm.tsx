@@ -54,9 +54,6 @@ const CheckoutForm = () => {
 
     setIsLoading(true);
 
-    console.log(process.env.NEXT_PUBLIC_BASE_URL);
-    
-
     try {
       const { error } = await stripe.confirmPayment({
         elements,
@@ -66,7 +63,6 @@ const CheckoutForm = () => {
       });
 
       if (error) {
-        // Handle specific error types or use a default error message
         if (error.type === "card_error" || error.type === "validation_error") {
           setMessage(
             error.message ?? "An unexpected error occurred. Please try again."
@@ -75,11 +71,12 @@ const CheckoutForm = () => {
           setMessage("An unexpected error occurred.");
         }
       } else {
-        // Payment success scenario
         setMessage("Payment succeeded!");
       }
     } catch (error) {
-      console.log("Error creating payment element", error);
+      new Error(
+        `Error creating payment intent. Error: ${JSON.stringify(error)}`
+      );
       setMessage("An unexpected error occurred.");
     }
 

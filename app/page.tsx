@@ -4,6 +4,7 @@ import getListings, { IListingsParams } from "@/app/actions/getListings";
 import ListingCard from "./components/listings/ListingCard";
 import Categories from "./components/navbar/Categories";
 import "../sass/styles.scss";
+import Landing from "./components/Landing";
 
 interface HomeProps {
   searchParams: IListingsParams;
@@ -15,7 +16,8 @@ const Home = async ({ searchParams }: HomeProps) => {
 
   return (
     <section className="landing">
-      <Categories />
+      <Landing />
+      {/* <Categories /> */}
       <ul className="landing__listing">
         {listings.map((listing: any) => {
           return (

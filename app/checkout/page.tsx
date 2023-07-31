@@ -22,7 +22,9 @@ const Checkout = async ({ searchParams }: { searchParams: Params }) => {
       </div>
     );
   } catch (error) {
-    console.log("Error fetching listing:", error);
+    new Error(
+      `Error fetching listing with id: ${searchParams.listingId}. Error: ${error}`
+    );
 
     return <div>Error fetching listing.</div>;
   }

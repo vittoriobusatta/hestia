@@ -40,7 +40,7 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
         await request;
         router.refresh();
       } catch (error) {
-        console.log(error);
+        new Error("Something went wrong while toggling favorite" + error);
         setHasFavorited(prevHasFavorited);
       }
     },

@@ -44,7 +44,10 @@ function Login() {
       }
 
       if (callback?.error) {
-        console.log("Error logging in!");
+        new Error(
+          "An error occured while trying to login, please try again later." +
+            callback.error
+        );
       }
     });
   };

@@ -14,7 +14,7 @@
 
 .landing {
   &__listing {
-    padding: 0 $gap;
+    padding: 188px $gap;
     --breakpoint-grid_columns: 1;
     --breakpoint-grid_column-gap: 24px;
     --breakpoint-grid_row-gap: 40px;
@@ -25,7 +25,7 @@
       --breakpoint-grid_columns: 3;
     }
     @media screen and (min-width: 992px) {
-      --breakpoint-grid_columns: 4;
+      --breakpoint-grid_columns: 6;
     }
     display: grid;
     grid-template-columns: repeat(
@@ -142,6 +142,7 @@
 .categories__container {
   padding: 0 $gap 44px;
 }
+
 .categories__container__list {
   display: inline-flex;
   justify-content: space-between;
@@ -166,5 +167,185 @@
     & svg {
       stroke: #1e9de6;
     }
+  }
+}
+
+.homepage {
+  position: relative;
+  background: #0f3a35;
+  color: #fff;
+  &__content {
+    display: inline-flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    column-gap: 3.5vw;
+    padding: 88px $gap 144px;
+  }
+  &__left,
+  &__right {
+    width: 50%;
+    height: 100%;
+  }
+  &__title {
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+    font-size: 5.3vw;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 105%;
+    max-width: 800px;
+    padding-bottom: 44px;
+  }
+  &__description {
+    color: #fff;
+    font-family: "Roboto", sans-serif;
+    font-size: 2.2rem;
+    line-height: 130%; /* 31.2px */
+    padding-bottom: 66px;
+    max-width: 550px;
+  }
+  &__left {
+    &__content {
+      @include full_hw;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+  &__right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    &__grid {
+      $gridGap: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 0.5fr 1fr;
+      // max-width: 700px;
+      max-width: 750px;
+      row-gap: $gridGap;
+      column-gap: $gridGap;
+      &__top {
+        display: inline-flex;
+        width: 100%;
+        grid-area: 1 / 1 / 2 / 4;
+        column-gap: $gridGap;
+        & img {
+          @include full_hw;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+  &__image {
+    & img {
+      @include full_hw;
+      object-fit: cover;
+    }
+    &--0 img {
+      border-radius: 50px 50px 0px 50px;
+    }
+    &--1 img {
+      border-radius: 50px 50px 50px 0px;
+    }
+    &--2 {
+      grid-area: 2 / 1 / 3 / 2;
+      & img {
+        border-radius: 50px 0px;
+      }
+    }
+    &--3 {
+      grid-area: 2 / 2 / 3 / 3;
+      & img {
+        border-radius: 0px 0px 50px 50px;
+      }
+    }
+    &--4 {
+      grid-area: 2 / 3 / 3 / 4;
+      & img {
+        border-radius: 0px 50px;
+      }
+    }
+  }
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 5vw;
+    & span {
+      color: #fff;
+      font-family: "Poppins", sans-serif;
+      font-size: 2rem;
+      font-style: normal;
+      line-height: normal;
+    }
+    &__book {
+      display: flex;
+      padding: 12px 36px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      border-radius: 10px;
+      background: #2a9d8f;
+      color: #fff;
+    }
+    &__discover {
+      display: inline-flex;
+      align-items: center;
+      gap: 26px;
+    }
+  }
+}
+
+.search {
+  bottom: 0%;
+  left: 50%;
+  transform: translateY(50%) translateX(-50%);
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #dddddd;
+  border-radius: 40px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05);
+  transform-origin: 50% 0%;
+  padding: 10px;
+  width: fit-content;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 1.8vw;
+  cursor: pointer;
+  &__input {
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    text-align: inherit;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin: -1px;
+    color: #000f08;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.6rem;
+    &:first-of-type {
+      padding-left: 24px;
+      border-top-left-radius: inherit;
+      border-bottom-left-radius: inherit;
+    }
+  }
+  &__line {
+    width: 1px;
+    height: 24px;
+    background-color: #dddddd;
+  }
+  &__button {
+    display: flex;
+    width: 45px;
+    height: 45px;
+    padding: 14px;
+    border-radius: 210px;
+    background: #2a9d8f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

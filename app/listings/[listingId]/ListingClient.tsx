@@ -61,8 +61,6 @@ const ListingClient: React.FC<ListingClientProps> = ({
     const startDate = dateRange.startDate ?? new Date();
     const endDate = dateRange.endDate ?? new Date();
 
-    console.log("startDate", startDate);
-
     const startDateString = getFormattedDate(startDate);
     const endDateString = getFormattedDate(endDate);
 

@@ -25,11 +25,11 @@ const TripsClient: React.FC<TripsClientProps> = ({
       axios
         .delete(`/api/reservations/${id}`)
         .then(() => {
-          console.log("Reservation cancelled");
           router.refresh();
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
+          alert("An error occured while trying to cancel the reservation.");
         })
         .finally(() => {
           setDeletingId("");
