@@ -1,7 +1,6 @@
 import { getServerSession } from "next-auth/next";
 import prisma from "../libs/prisma";
 import { authOptions } from "../api/auth/[...nextauth]/route";
-import { NextResponse } from "next/server";
 
 export async function getSession() {
   return await getServerSession(authOptions);
@@ -12,8 +11,7 @@ export default async function getCurrentUser(): Promise<any> {
     const session = await getSession();
 
     if (!session?.user?.email) {
-      new Error("No session found");
-      return NextResponse.error();
+      throw new Error("No session found or user email is missing");
     }
 
     const currentUser = await prisma.user.findUnique({
@@ -23,8 +21,7 @@ export default async function getCurrentUser(): Promise<any> {
     });
 
     if (!currentUser) {
-      new Error("No user found");
-      return NextResponse.error();
+      throw new Error("User not found in the database");
     }
 
     return {
@@ -32,7 +29,6 @@ export default async function getCurrentUser(): Promise<any> {
       emailVerified: currentUser.emailVerified?.toISOString() || null,
     };
   } catch (error: any) {
-    new Error("Something went wrong while fetching the current user");
-    return NextResponse.error();
+    throw new Error("Something went wrong while fetching the current user");
   }
 }

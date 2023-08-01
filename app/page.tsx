@@ -10,14 +10,20 @@ interface HomeProps {
 }
 
 const Home = async ({ searchParams }: HomeProps) => {
-  const currentUser = await getCurrentUser();
+  let currentUser;
+  try {
+    currentUser = await getCurrentUser();
+  } catch (error: any) {
+    console.error("Error while fetching current user:", error.message);
+    currentUser = null;
+  }
   const listings = await getListings(searchParams);
 
   return (
-    <section className="landing">
+    <>
       <Landing />
       <Listing listings={listings} currentUser={currentUser} />
-    </section>
+    </>
   );
 };
 

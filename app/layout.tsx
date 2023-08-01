@@ -20,10 +20,13 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const currentUser = await getCurrentUser();
-
-  console.log(currentUser);
-  
+  let currentUser;
+  try {
+    currentUser = await getCurrentUser();
+  } catch (error: any) {
+    console.error("Error while fetching current user:", error.message);
+    currentUser = null;
+  }
 
   return (
     <html lang="en">

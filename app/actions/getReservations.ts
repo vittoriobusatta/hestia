@@ -12,6 +12,10 @@ export default async function getReservations(params: IParams) {
 
     const query: any = {};
 
+    if (!listingId && !userId && !authorId) {
+      throw new Error("Missing required parameters");
+    }
+
     if (listingId) {
       query.listingId = listingId;
     }

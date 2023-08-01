@@ -3,11 +3,9 @@ import React from "react";
 import ListingCard from "../listings/ListingCard";
 
 function Listing({ listings, currentUser }: any) {
-  console.log(currentUser);
-
   return (
-    <section>
-      <ul className="landing__listing">
+    <section id="landing__listing">
+      <ul className="landing__list">
         {listings.map((listing: any) => {
           return (
             <ListingCard

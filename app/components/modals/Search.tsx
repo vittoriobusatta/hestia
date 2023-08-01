@@ -123,21 +123,20 @@ const SearchModal = () => {
   let bodyContent = (
     <div className="modal__body__content">
       <div className="modal__body__head">
-        <h1>Where do you wanna go?</h1>
-        <h4>Find the perfect location!</h4>
+        <h1>Où voulez-vous aller?</h1>
+        <h4>Trouvez votre logement idéal!</h4>
       </div>
       <CitiesSelect value={location} onChange={(value) => setLocation(value)} />
-      <hr />
       <Map center={location?.latlng} />
     </div>
   );
 
   if (step === STEPS.DATE) {
     bodyContent = (
-      <div className="flex flex-col gap-8">
+      <div className="modal__body__content">
         <div className="modal__body__head">
-          <h1>Where do you wanna go?</h1>
-          <h4>Make sure everyone is free!</h4>
+          <h1>Quand voulez-vous partir?</h1>
+          <h4>Assurrer vous que tout le monde est libre!</h4>
         </div>
         <Calendar
           onChange={(value) => setDateRange(value.selection)}
@@ -149,23 +148,23 @@ const SearchModal = () => {
 
   if (step === STEPS.INFO) {
     bodyContent = (
-      <div className="flex flex-col gap-8">
+      <div className="modal__body__content info">
         <div className="modal__body__head">
-          <h1>More information</h1>
-          <h4>Find your perfect place!</h4>
+          <h1>Plus d&apos;informations</h1>
+          <h4>Trouver votre logement idéal!</h4>
         </div>
         <Counter
           onChange={(value) => setGuestCount(value)}
           value={guestCount}
-          title="Guests"
-          subtitle="How many guests are coming?"
+          title="Voyageurs"
+          subtitle="Combien de voyageurs viennent?"
         />
         <hr />
         <Counter
           onChange={(value) => setRoomCount(value)}
           value={roomCount}
-          title="Rooms"
-          subtitle="How many rooms do you need?"
+          title="Chambres"
+          subtitle="Combien de chambres avez-vous besoin?"
         />
         <hr />
         <Counter
@@ -173,8 +172,8 @@ const SearchModal = () => {
             setBathroomCount(value);
           }}
           value={bathroomCount}
-          title="Bathrooms"
-          subtitle="How many bahtrooms do you need?"
+          title="Salles de bain"
+          subtitle="Combien de salles de bain avez-vous besoin?"
         />
       </div>
     );

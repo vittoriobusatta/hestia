@@ -12,13 +12,11 @@ export const createReservation = async (reservation: Reservation) => {
   const { startDate, endDate, totalPrice, listingId, userId } = reservation;
 
   if (!userId) {
-    new Error("No user found");
-    return NextResponse.error();
+    throw new Error("No user found");
   }
 
   if (!listingId || !startDate || !endDate || !totalPrice) {
-    new Error("Missing reservation data");
-    return NextResponse.error();
+    throw new Error("Missing reservation data");
   }
 
   const listingAndReservation = await prisma.listing.update({

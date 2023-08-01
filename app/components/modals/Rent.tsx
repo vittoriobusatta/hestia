@@ -153,8 +153,8 @@ const RentModal = () => {
       bodyContent = (
         <div className="modal__body__content">
           <div className="modal__body__head">
-            <h1>Where is your place located?</h1>
-            <h4>Help guests find you!</h4>
+            <h1>Où se trouve votre logement?</h1>
+            <h4>Aidons les voyageurs à trouver votre logement</h4>
           </div>
           <CitiesSelect
             value={location}
@@ -169,28 +169,28 @@ const RentModal = () => {
       bodyContent = (
         <div className="modal__body__content info">
           <div className="modal__body__head">
-            <h1>Share some basics about your place</h1>
-            <h4>What amenitis do you have?</h4>
+            <h1>Partagez quelques informations sur votre logement</h1>
+            <h4>Quels sont les équipements de votre logement?</h4>
           </div>
           <Counter
             onChange={(value) => setCustomValue("guestCount", value)}
             value={guestCount}
-            title="Guests"
-            subtitle="How many guests do you allow?"
+            title="Voyageurs"
+            subtitle="Combien de voyageurs pouvez-vous accueillir?"
           />
           <hr />
           <Counter
             onChange={(value) => setCustomValue("roomCount", value)}
             value={roomCount}
-            title="Rooms"
-            subtitle="How many rooms do you have?"
+            title="Chambres"
+            subtitle="Combien de chambres avez-vous?"
           />
           <hr />
           <Counter
             onChange={(value) => setCustomValue("bathroomCount", value)}
             value={bathroomCount}
-            title="Bathrooms"
-            subtitle="How many bathrooms do you have?"
+            title="Salle de bain"
+            subtitle="Combien de salles de bains avez-vous?"
           />
         </div>
       );
@@ -264,8 +264,8 @@ const RentModal = () => {
       bodyContent = (
         <div className="modal__body__content">
           <div className="modal__body__head">
-            <h1>Which of these best describes your place?</h1>
-            <h4>Pick a category</h4>
+            <h1>Quel type de logement souhaitez-vous proposer?</h1>
+            <h4>Choisissez une catégorie</h4>
           </div>
           <div className="categories__list">
             {categories.map((item: any) => {

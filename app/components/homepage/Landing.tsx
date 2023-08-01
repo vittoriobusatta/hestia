@@ -10,7 +10,7 @@ import Search from "../navbar/Search";
 
 function Landing() {
   return (
-    <div className="homepage">
+    <section className="homepage">
       <div className="homepage__content">
         <div className="homepage__left">
           <div className="homepage__left__content">
@@ -22,9 +22,9 @@ function Landing() {
               coralliens préservés, la Réunion regorge de merveilles à explorer.
             </p>
             <div className="homepage__cta">
-              <button className="homepage__cta__book">
+              <a href="#landing__listing" className="homepage__cta__book">
                 <span>Réserver</span>
-              </button>
+              </a>
               <button className="homepage__cta__discover">
                 <svg
                   width="16"
@@ -95,7 +95,7 @@ function Landing() {
         </div>
       </div>
       <Search />
-    </div>
+    </section>
   );
 }
 

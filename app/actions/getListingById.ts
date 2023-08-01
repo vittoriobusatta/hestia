@@ -18,7 +18,7 @@ export default async function getListingById(params: IParams) {
     });
 
     if (!listing) {
-      return null;
+      throw new Error("Listing not found");
     }
 
     return {
