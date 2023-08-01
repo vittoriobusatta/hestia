@@ -1,11 +1,12 @@
-import React from "react";
-import img1 from "../../public/assets/landing/l_01.jpg";
-import img2 from "../../public/assets/landing/l_02.jpg";
-import img3 from "../../public/assets/landing/l_03.jpg";
-import img4 from "../../public/assets/landing/l_04.jpg";
-import img5 from "../../public/assets/landing/l_05.jpg";
+"use client";
+import React, { useEffect } from "react";
+import img1 from "../../../public/assets/landing/l_01.jpg";
+import img2 from "../../../public/assets/landing/l_02.jpg";
+import img3 from "../../../public/assets/landing/l_03.jpg";
+import img4 from "../../../public/assets/landing/l_04.jpg";
+import img5 from "../../../public/assets/landing/l_05.jpg";
 import Image from "next/image";
-import Search from "./navbar/Search";
+import Search from "../navbar/Search";
 
 function Landing() {
   return (

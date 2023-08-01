@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import prisma from "../../../app/libs/prisma";
-import { generateAvatar } from "@/app/hooks/generateAvatar";
+import { generateAvatar } from "@/app/actions/generate/generateAvatar";
 
 export async function POST(request: Request) {
   const body = await request.json();

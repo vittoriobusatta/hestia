@@ -22,6 +22,9 @@ export default async function RootLayout({
 }) {
   const currentUser = await getCurrentUser();
 
+  console.log(currentUser);
+  
+
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>

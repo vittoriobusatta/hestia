@@ -1,10 +1,9 @@
 import React from "react";
 import getCurrentUser from "./actions/getCurrentUser";
 import getListings, { IListingsParams } from "@/app/actions/getListings";
-import ListingCard from "./components/listings/ListingCard";
-import Categories from "./components/navbar/Categories";
 import "../sass/styles.scss";
-import Landing from "./components/Landing";
+import Landing from "./components/homepage/Landing";
+import Listing from "./components/homepage/Listing";
 
 interface HomeProps {
   searchParams: IListingsParams;
@@ -17,18 +16,7 @@ const Home = async ({ searchParams }: HomeProps) => {
   return (
     <section className="landing">
       <Landing />
-      {/* <Categories /> */}
-      <ul className="landing__listing">
-        {listings.map((listing: any) => {
-          return (
-            <ListingCard
-              key={listing.id}
-              listing={listing}
-              currentUser={currentUser}
-            />
-          );
-        })}
-      </ul>
+      <Listing listings={listings} currentUser={currentUser} />
     </section>
   );
 };

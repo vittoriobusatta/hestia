@@ -1,5 +1,5 @@
 export async function generateAvatar(name: string) {
-  const colors = ["111", "1E9DE6"];
+  const colors = ["92D1C3", "8BB8A8"];
   const firstLetter = name.charAt(0);
   const encodedName = encodeURIComponent(firstLetter);
   const apiUrl = `https://ui-avatars.com/api/?name=${encodedName}&background=${

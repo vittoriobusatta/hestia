@@ -7,7 +7,6 @@ import useLoginModal from "@/app/hooks/useLoginModal";
 import { useRouter } from "next/navigation";
 import { differenceInCalendarDays, eachDayOfInterval, format } from "date-fns";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import axios from "axios";
 import ListingReservation from "@/app/components/listings/ListingReservation";
 import { getFormattedDate } from "@/utils/helpers";
 
